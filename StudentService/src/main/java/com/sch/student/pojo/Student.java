@@ -1,11 +1,24 @@
 package com.sch.student.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sch.student.dto.StudentDTO;
+import com.sch.student.dto.*;
 import lombok.Getter;
 
 @Getter
 public class Student{
     @JsonProperty("UserInfo")
     private StudentDTO userInfo;
+
+    @JsonProperty("UserReport")
+    private StudentReportDTO userReport;
+
+    @JsonProperty("UserClassPassed")
+    private StudentInfoClassDTO userInfoClass;
+
+    @JsonProperty("UserEnroll")
+    private StudentEnrollDTO userEnroll;
+
+    @JsonProperty("UserOption")
+    private StudentOptionDTO userOption;
+
 }

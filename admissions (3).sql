@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 03, 2023 lúc 06:11 AM
+-- Thời gian đã tạo: Th4 05, 2023 lúc 11:30 AM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.0.25
 
@@ -29,18 +29,25 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `category_subject` (
   `id_category` bigint(20) NOT NULL,
-  `math` tinyint(1) NOT NULL DEFAULT 0,
-  `literature` tinyint(1) NOT NULL DEFAULT 0,
-  `informatics` tinyint(1) NOT NULL DEFAULT 0,
-  `physics` tinyint(1) NOT NULL DEFAULT 0,
-  `chemistry` tinyint(1) NOT NULL DEFAULT 0,
-  `biology` tinyint(1) NOT NULL DEFAULT 0,
-  `english` tinyint(1) NOT NULL DEFAULT 0,
-  `social_science` tinyint(1) NOT NULL DEFAULT 0,
-  `sciences_technology` tinyint(1) NOT NULL DEFAULT 0,
+  `name_subject` varchar(50) NOT NULL,
   `create_category` datetime NOT NULL,
   `modify_category` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `category_subject`
+--
+
+INSERT INTO `category_subject` (`id_category`, `name_subject`, `create_category`, `modify_category`) VALUES
+(1, 'Toán', '2023-04-05 10:35:11', '2023-04-05 10:35:11'),
+(2, 'Văn', '2023-04-05 10:35:11', '2023-04-05 10:35:11'),
+(3, 'Tin', '2023-04-05 10:35:11', '2023-04-05 10:35:11'),
+(4, 'Lý', '2023-04-05 10:35:11', '2023-04-05 10:35:11'),
+(5, 'Hóa', '2023-04-05 10:35:11', '2023-04-05 10:35:11'),
+(6, 'Sinh', '2023-04-05 10:35:11', '2023-04-05 10:35:11'),
+(7, 'Anh', '2023-04-05 10:35:11', '2023-04-05 10:35:11'),
+(8, 'Khoa học tự nhiên & Công nghệ', '2023-04-05 10:35:11', '2023-04-05 10:35:11'),
+(9, 'Khoa học xã hội', '2023-04-05 10:35:11', '2023-04-05 10:35:11');
 
 -- --------------------------------------------------------
 
@@ -50,15 +57,22 @@ CREATE TABLE `category_subject` (
 
 CREATE TABLE `sch_enroll_student` (
   `id_enroll` bigint(20) NOT NULL,
-  `math` tinyint(2) NOT NULL DEFAULT 1,
-  `literature` tinyint(2) NOT NULL DEFAULT 1,
-  `english` tinyint(2) NOT NULL DEFAULT 1,
-  `other_subject_1th` varchar(50) NOT NULL,
-  `other_subject_2th` varchar(50) NOT NULL,
+  `math` tinyint(1) NOT NULL DEFAULT 1,
+  `literature` tinyint(1) NOT NULL DEFAULT 1,
+  `english` tinyint(1) NOT NULL DEFAULT 1,
+  `other_subject_1th` text NOT NULL,
+  `other_subject_2th` text NOT NULL,
   `id_report` bigint(20) NOT NULL,
   `create_enroll` datetime NOT NULL,
   `modify_enroll` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `sch_enroll_student`
+--
+
+INSERT INTO `sch_enroll_student` (`id_enroll`, `math`, `literature`, `english`, `other_subject_1th`, `other_subject_2th`, `id_report`, `create_enroll`, `modify_enroll`) VALUES
+(1, 1, 1, 1, '[Toan, Ly1]', '[Anh, Cong Nghe2]', 1, '2023-04-05 16:27:41', '2023-04-05 16:27:41');
 
 -- --------------------------------------------------------
 
@@ -68,15 +82,22 @@ CREATE TABLE `sch_enroll_student` (
 
 CREATE TABLE `sch_info_class` (
   `id_class` bigint(20) NOT NULL,
-  `6th_grade` tinyint(2) NOT NULL,
-  `7th_grade` tinyint(2) NOT NULL,
-  `8th_grade` tinyint(2) NOT NULL,
-  `9th_grade` tinyint(2) NOT NULL,
-  `conduct_certificate` tinyint(2) NOT NULL,
+  `6th_grade` tinyint(1) NOT NULL,
+  `7th_grade` tinyint(1) NOT NULL,
+  `8th_grade` tinyint(1) NOT NULL,
+  `9th_grade` tinyint(1) NOT NULL,
+  `conduct_certificate` tinyint(1) NOT NULL,
   `id_report` bigint(20) NOT NULL,
   `create_info_class` datetime NOT NULL,
   `modify_info_class` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `sch_info_class`
+--
+
+INSERT INTO `sch_info_class` (`id_class`, `6th_grade`, `7th_grade`, `8th_grade`, `9th_grade`, `conduct_certificate`, `id_report`, `create_info_class`, `modify_info_class`) VALUES
+(1, 1, 1, 1, 0, 1, 1, '2023-04-05 16:27:41', '2023-04-05 16:27:41');
 
 -- --------------------------------------------------------
 
@@ -86,15 +107,22 @@ CREATE TABLE `sch_info_class` (
 
 CREATE TABLE `sch_option_student` (
   `id_option` bigint(20) NOT NULL,
-  `aspiration_1th` int(11) NOT NULL,
-  `aspiration_2th` int(11) NOT NULL,
-  `aspiration_3th` int(11) NOT NULL,
-  `aspiration_4th` int(11) NOT NULL,
-  `id_category` bigint(20) NOT NULL,
+  `aspiration_1th` text NOT NULL,
+  `aspiration_2th` text NOT NULL,
+  `aspiration_3th` text NOT NULL,
+  `aspiration_4th` text NOT NULL,
+  `aspiration_5th` text NOT NULL,
   `id_report` bigint(20) NOT NULL,
   `create_option` datetime NOT NULL,
   `modify_option` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `sch_option_student`
+--
+
+INSERT INTO `sch_option_student` (`id_option`, `aspiration_1th`, `aspiration_2th`, `aspiration_3th`, `aspiration_4th`, `aspiration_5th`, `id_report`, `create_option`, `modify_option`) VALUES
+(1, 'Toán', 'Văn', 'Lý', 'Anh', 'Khoa học xã hội', 1, '2023-04-05 16:27:45', '2023-04-05 16:27:45');
 
 -- --------------------------------------------------------
 
@@ -106,11 +134,18 @@ CREATE TABLE `sch_student_report` (
   `id_report` bigint(20) NOT NULL,
   `school_passed` text NOT NULL,
   `school_address` text NOT NULL,
-  `academic_ability` tinyint(3) NOT NULL,
+  `academic_ability` tinyint(1) NOT NULL,
   `id_user` bigint(20) NOT NULL,
   `create_report` datetime NOT NULL,
   `modify_report` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `sch_student_report`
+--
+
+INSERT INTO `sch_student_report` (`id_report`, `school_passed`, `school_address`, `academic_ability`, `id_user`, `create_report`, `modify_report`) VALUES
+(1, 'Phu Nhua3n', 'Phu Nhua3n', 1, 1, '2023-04-05 16:27:41', '2023-04-05 16:27:41');
 
 -- --------------------------------------------------------
 
@@ -137,6 +172,13 @@ CREATE TABLE `sch_user` (
   `create_account` datetime NOT NULL,
   `modify_account` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `sch_user`
+--
+
+INSERT INTO `sch_user` (`id_user`, `first_name`, `last_name`, `password`, `verify`, `email`, `address`, `birthday`, `sex`, `ethnicity`, `identify_info`, `nationality`, `phone_number`, `landline_phone_number`, `option_phone`, `create_account`, `modify_account`) VALUES
+(1, 'test32', 'testto32', '123222', 0, 'dangvytestto@gmail.com22', '1123423532/45454 le van si2', '1999-02-20', 1, 'Kinh2', '0790990150672', 'vietNam2', '07085178562', '09085178562', 'dad2', '2023-04-05 16:27:41', '2023-04-05 16:27:41');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -167,7 +209,6 @@ ALTER TABLE `sch_info_class`
 --
 ALTER TABLE `sch_option_student`
   ADD PRIMARY KEY (`id_option`),
-  ADD KEY `option_category` (`id_category`),
   ADD KEY `option_report` (`id_report`);
 
 --
@@ -191,37 +232,37 @@ ALTER TABLE `sch_user`
 -- AUTO_INCREMENT cho bảng `category_subject`
 --
 ALTER TABLE `category_subject`
-  MODIFY `id_category` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_category` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `sch_enroll_student`
 --
 ALTER TABLE `sch_enroll_student`
-  MODIFY `id_enroll` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_enroll` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `sch_info_class`
 --
 ALTER TABLE `sch_info_class`
-  MODIFY `id_class` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_class` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `sch_option_student`
 --
 ALTER TABLE `sch_option_student`
-  MODIFY `id_option` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_option` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `sch_student_report`
 --
 ALTER TABLE `sch_student_report`
-  MODIFY `id_report` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_report` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `sch_user`
 --
 ALTER TABLE `sch_user`
-  MODIFY `id_user` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -243,7 +284,6 @@ ALTER TABLE `sch_info_class`
 -- Các ràng buộc cho bảng `sch_option_student`
 --
 ALTER TABLE `sch_option_student`
-  ADD CONSTRAINT `option_category` FOREIGN KEY (`id_category`) REFERENCES `category_subject` (`id_category`),
   ADD CONSTRAINT `option_report` FOREIGN KEY (`id_report`) REFERENCES `sch_student_report` (`id_report`);
 
 --
