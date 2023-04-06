@@ -27,14 +27,14 @@ public class StudentEntity implements Serializable {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "password")
-    private String password;
-
-    @Column(name = "verify")
-    private int verify;
-
-    @Column(name = "email")
-    private String email;
+//    @Column(name = "password")
+//    private String password;
+//
+//    @Column(name = "verify")
+//    private int verify;
+//
+//    @Column(name = "email")
+//    private String email;
 
     @Column(name = "address")
     private String address;
