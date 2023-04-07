@@ -74,6 +74,21 @@ public class AccountServiceImpl implements AccountService {
             return accountRegister;
         }
     }
+
+    @Override
+    public String verifyAccountRequest(String verifyCode){
+        AccountEntity getDetailAccountInfo = accountRepository.checkVerifyAccount(verifyCode);
+        if(getDetailAccountInfo != null){
+            //Update status , enable
+            getDetailAccountInfo.setStatus(1);
+            getDetailAccountInfo.setEnable(1);
+            registerAccount(getDetailAccountInfo);
+            return SuccessApi.VERIFY_STATUS_SUCCESS;
+        }else {
+            return ErrorApi.VERIFY_STATUS_FAIL;
+        }
+    }
+
     public void sendMailVerifyAccount(AccountEntity account,String url) throws MessagingException, UnsupportedEncodingException {
         String subject = "Please verify your registration";
         String senderName="Net Movie";
