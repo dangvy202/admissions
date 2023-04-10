@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 09, 2023 lúc 05:57 PM
+-- Thời gian đã tạo: Th4 10, 2023 lúc 04:52 AM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.0.25
 
@@ -94,6 +94,7 @@ CREATE TABLE `sch_application_form` (
   `id_option` bigint(20) NOT NULL,
   `id_class` bigint(20) NOT NULL,
   `id_enroll` bigint(20) NOT NULL,
+  `id_account` bigint(20) NOT NULL,
   `create_application` datetime(6) DEFAULT NULL,
   `modify_application` datetime(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -102,13 +103,14 @@ CREATE TABLE `sch_application_form` (
 -- Đang đổ dữ liệu cho bảng `sch_application_form`
 --
 
-INSERT INTO `sch_application_form` (`id_application`, `id_user`, `id_report`, `id_option`, `id_class`, `id_enroll`, `create_application`, `modify_application`) VALUES
-(1, 1, 1, 1, 1, 1, '2023-04-06 08:53:41.000000', '2023-04-06 08:53:41.000000'),
-(2, 2, 2, 2, 2, 2, '2023-04-06 09:15:35.000000', '2023-04-06 09:15:35.000000'),
-(3, 3, 3, 3, 3, 3, '2023-04-06 09:20:17.000000', '2023-04-06 09:20:17.000000'),
-(4, 4, 4, 4, 4, 4, '2023-04-06 09:24:31.000000', '2023-04-06 09:24:31.000000'),
-(5, 5, 5, 5, 5, 5, '2023-04-06 09:24:31.000000', '2023-04-06 09:24:31.000000'),
-(6, 6, 6, 6, 6, 6, '2023-04-06 14:25:10.000000', '2023-04-06 14:25:10.000000');
+INSERT INTO `sch_application_form` (`id_application`, `id_user`, `id_report`, `id_option`, `id_class`, `id_enroll`, `id_account`, `create_application`, `modify_application`) VALUES
+(1, 1, 1, 1, 1, 1, 2, '2023-04-06 08:53:41.000000', '2023-04-06 08:53:41.000000'),
+(2, 2, 2, 2, 2, 2, 2, '2023-04-06 09:15:35.000000', '2023-04-06 09:15:35.000000'),
+(3, 3, 3, 3, 3, 3, 2, '2023-04-06 09:20:17.000000', '2023-04-06 09:20:17.000000'),
+(4, 4, 4, 4, 4, 4, 2, '2023-04-06 09:24:31.000000', '2023-04-06 09:24:31.000000'),
+(5, 5, 5, 5, 5, 5, 2, '2023-04-06 09:24:31.000000', '2023-04-06 09:24:31.000000'),
+(6, 6, 6, 6, 6, 6, 2, '2023-04-06 14:25:10.000000', '2023-04-06 14:25:10.000000'),
+(7, 7, 7, 7, 7, 7, 8, '2023-04-10 09:50:54.000000', '2023-04-10 09:50:54.000000');
 
 -- --------------------------------------------------------
 
@@ -138,7 +140,8 @@ INSERT INTO `sch_enroll_student` (`id_enroll`, `math`, `literature`, `english`, 
 (3, 1, 1, 1, '[Toan, Ly1]', '[Anh, Cong Nghe2]', 3, '2023-04-06 14:19:43.000000', '2023-04-06 14:19:43.000000'),
 (4, 1, 1, 1, '[Toan, Ly1]', '[Anh, Cong Nghe2]', 4, '2023-04-06 14:20:36.000000', '2023-04-06 14:20:36.000000'),
 (5, 1, 1, 1, '[Toan, Ly1]', '[Anh, Cong Nghe2]', 5, '2023-04-06 14:21:50.000000', '2023-04-06 14:21:50.000000'),
-(6, 1, 1, 1, '[Toan, Ly1]', '[Anh, Cong Nghe2]', 6, '2023-04-06 14:25:10.000000', '2023-04-06 14:25:10.000000');
+(6, 1, 1, 1, '[Toan, Ly1]', '[Anh, Cong Nghe2]', 6, '2023-04-06 14:25:10.000000', '2023-04-06 14:25:10.000000'),
+(7, 1, 1, 1, '[Toan, Ly1]', '[Anh, Cong Nghe2]', 7, '2023-04-10 09:50:54.000000', '2023-04-10 09:50:54.000000');
 
 -- --------------------------------------------------------
 
@@ -148,14 +151,14 @@ INSERT INTO `sch_enroll_student` (`id_enroll`, `math`, `literature`, `english`, 
 
 CREATE TABLE `sch_info_class` (
   `id_class` bigint(20) NOT NULL,
-  `6th_grade` tinyint(1) DEFAULT NULL,
-  `7th_grade` tinyint(1) DEFAULT NULL,
-  `8th_grade` tinyint(1) DEFAULT NULL,
-  `9th_grade` tinyint(1) DEFAULT NULL,
-  `conduct_certificate_6th` tinyint(1) DEFAULT NULL,
-  `conduct_certificate_7th` tinyint(1) NOT NULL,
-  `conduct_certificate_8th` tinyint(1) NOT NULL,
-  `conduct_certificate_9th` tinyint(1) NOT NULL,
+  `6th_grade` int(11) DEFAULT NULL,
+  `7th_grade` int(11) DEFAULT NULL,
+  `8th_grade` int(11) DEFAULT NULL,
+  `9th_grade` int(11) DEFAULT NULL,
+  `conduct_certificate_6th` int(11) DEFAULT NULL,
+  `conduct_certificate_7th` int(11) DEFAULT NULL,
+  `conduct_certificate_8th` int(11) DEFAULT NULL,
+  `conduct_certificate_9th` int(11) DEFAULT NULL,
   `id_report` bigint(20) NOT NULL,
   `create_info_class` datetime(6) DEFAULT NULL,
   `modify_info_class` datetime(6) DEFAULT NULL
@@ -171,7 +174,8 @@ INSERT INTO `sch_info_class` (`id_class`, `6th_grade`, `7th_grade`, `8th_grade`,
 (3, 1, 1, 1, 0, 1, 0, 0, 0, 3, '2023-04-06 14:19:43.000000', '2023-04-06 14:19:43.000000'),
 (4, 1, 1, 1, 0, 1, 0, 0, 0, 4, '2023-04-06 14:20:36.000000', '2023-04-06 14:20:36.000000'),
 (5, 1, 1, 1, 0, 1, 0, 0, 0, 5, '2023-04-06 14:21:49.000000', '2023-04-06 14:21:49.000000'),
-(6, 1, 1, 1, 0, 1, 0, 0, 0, 6, '2023-04-06 14:25:10.000000', '2023-04-06 14:25:10.000000');
+(6, 1, 1, 1, 0, 1, 0, 0, 0, 6, '2023-04-06 14:25:10.000000', '2023-04-06 14:25:10.000000'),
+(7, 1, 1, 1, 0, 0, 0, 0, 0, 7, '2023-04-10 09:50:54.000000', '2023-04-10 09:50:54.000000');
 
 -- --------------------------------------------------------
 
@@ -201,7 +205,8 @@ INSERT INTO `sch_option_student` (`id_option`, `aspiration_1th`, `aspiration_2th
 (3, 'Toán', 'Văn', 'Lý', 'Anh', 'Khoa học xã hội', 3, '2023-04-06 14:19:47.000000', '2023-04-06 14:19:47.000000'),
 (4, 'Toán', 'Văn', 'Lý', 'Anh', 'Khoa học xã hội', 4, '2023-04-06 14:20:38.000000', '2023-04-06 14:20:38.000000'),
 (5, 'Toán', 'Văn', 'Lý', 'Anh', 'Khoa học xã hội', 5, '2023-04-06 14:21:50.000000', '2023-04-06 14:21:50.000000'),
-(6, 'Toán', 'Văn', 'Lý', 'Anh', 'Khoa học xã hội', 6, '2023-04-06 14:25:10.000000', '2023-04-06 14:25:10.000000');
+(6, 'Toán', 'Văn', 'Lý', 'Anh', 'Khoa học xã hội', 6, '2023-04-06 14:25:10.000000', '2023-04-06 14:25:10.000000'),
+(7, 'Toán', 'Văn', 'Lý', 'Anh', 'Khoa học xã hội', 7, '2023-04-10 09:50:54.000000', '2023-04-10 09:50:54.000000');
 
 -- --------------------------------------------------------
 
@@ -229,7 +234,8 @@ INSERT INTO `sch_student_report` (`id_report`, `school_passed`, `school_address`
 (3, 'Phu Nhua3n', 'Phu Nhua3n', 1, 3, '2023-04-06 14:19:43.000000', '2023-04-06 14:19:43.000000'),
 (4, 'Phu Nhua3n', 'Phu Nhua3n', 1, 4, '2023-04-06 14:20:36.000000', '2023-04-06 14:20:36.000000'),
 (5, 'Phu Nhua3n', 'Phu Nhua3n', 1, 5, '2023-04-06 14:21:49.000000', '2023-04-06 14:21:49.000000'),
-(6, 'Phu Nhua3n', 'Phu Nhua3n', 1, 6, '2023-04-06 14:25:10.000000', '2023-04-06 14:25:10.000000');
+(6, 'Phu Nhua3n', 'Phu Nhua3n', 1, 6, '2023-04-06 14:25:10.000000', '2023-04-06 14:25:10.000000'),
+(7, 'Phu Nhua3n', 'Phu Nhua3n', 1, 7, '2023-04-10 09:50:54.000000', '2023-04-10 09:50:54.000000');
 
 -- --------------------------------------------------------
 
@@ -267,7 +273,8 @@ INSERT INTO `sch_user` (`id_user`, `first_name`, `last_name`, `address`, `birthd
 (3, 'test32', 'testto32', '1123423532/45454 le van si2', '1999-02-20 00:00:00.000000', 1, 'Kinh2', '0790990150672', 'vietNam2', '07085178562', '09085178562', 'dad2', '2023-04-06 14:19:43.000000', '2023-04-06 14:19:43.000000', NULL, NULL, NULL),
 (4, 'test32', 'testto32', '1123423532/45454 le van si2', '1999-02-20 00:00:00.000000', 1, 'Kinh2', '0790990150672', 'vietNam2', '07085178562', '09085178562', 'dad2', '2023-04-06 14:20:36.000000', '2023-04-06 14:20:36.000000', NULL, NULL, NULL),
 (5, 'test32', 'testto32', '1123423532/45454 le van si2', '1999-02-20 00:00:00.000000', 1, 'Kinh2', '0790990150672', 'vietNam2', '07085178562', '09085178562', 'dad2', '2023-04-06 14:21:38.000000', '2023-04-06 14:21:38.000000', NULL, NULL, NULL),
-(6, 'test32', 'testto32', '1123423532/45454 le van si2', '1999-02-20 00:00:00.000000', 1, 'Kinh2', '0790990150672', 'vietNam2', '07085178562', '09085178562', 'dad2', '2023-04-06 14:25:10.000000', '2023-04-06 14:25:10.000000', NULL, NULL, NULL);
+(6, 'test32', 'testto32', '1123423532/45454 le van si2', '1999-02-20 00:00:00.000000', 1, 'Kinh2', '0790990150672', 'vietNam2', '07085178562', '09085178562', 'dad2', '2023-04-06 14:25:10.000000', '2023-04-06 14:25:10.000000', NULL, NULL, NULL),
+(7, 'test32', 'testto32', '1123423532/45454 le van si2', '1999-02-20 07:00:00.000000', 1, 'Kinh2', '0790990150672', 'vietNam2', '07085178562', '09085178562', 'dad2', '2023-04-10 09:50:54.000000', '2023-04-10 09:50:54.000000', NULL, NULL, NULL);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -294,7 +301,8 @@ ALTER TABLE `sch_application_form`
   ADD KEY `application_report` (`id_report`),
   ADD KEY `application_option` (`id_option`),
   ADD KEY `application_class` (`id_class`),
-  ADD KEY `application_enroll` (`id_enroll`);
+  ADD KEY `application_enroll` (`id_enroll`),
+  ADD KEY `application_account` (`id_account`);
 
 --
 -- Chỉ mục cho bảng `sch_enroll_student`
@@ -350,37 +358,37 @@ ALTER TABLE `sch_account`
 -- AUTO_INCREMENT cho bảng `sch_application_form`
 --
 ALTER TABLE `sch_application_form`
-  MODIFY `id_application` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_application` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `sch_enroll_student`
 --
 ALTER TABLE `sch_enroll_student`
-  MODIFY `id_enroll` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_enroll` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `sch_info_class`
 --
 ALTER TABLE `sch_info_class`
-  MODIFY `id_class` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_class` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `sch_option_student`
 --
 ALTER TABLE `sch_option_student`
-  MODIFY `id_option` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_option` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `sch_student_report`
 --
 ALTER TABLE `sch_student_report`
-  MODIFY `id_report` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_report` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `sch_user`
 --
 ALTER TABLE `sch_user`
-  MODIFY `id_user` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_user` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -390,6 +398,7 @@ ALTER TABLE `sch_user`
 -- Các ràng buộc cho bảng `sch_application_form`
 --
 ALTER TABLE `sch_application_form`
+  ADD CONSTRAINT `application_account` FOREIGN KEY (`id_account`) REFERENCES `sch_account` (`id_account`),
   ADD CONSTRAINT `application_class` FOREIGN KEY (`id_class`) REFERENCES `sch_info_class` (`id_class`),
   ADD CONSTRAINT `application_enroll` FOREIGN KEY (`id_enroll`) REFERENCES `sch_enroll_student` (`id_enroll`),
   ADD CONSTRAINT `application_option` FOREIGN KEY (`id_option`) REFERENCES `sch_option_student` (`id_option`),

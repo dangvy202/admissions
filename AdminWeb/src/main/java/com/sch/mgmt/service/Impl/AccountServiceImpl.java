@@ -30,12 +30,6 @@ public class AccountServiceImpl implements AccountService {
     private JavaMailSender mailSender;
 
     @Override
-    public AccountEntity setAccountForApplicationForm(String identifierCode){
-        AccountEntity accountForApplicationForm = accountRepository.checkIdentifierCodeAccount(identifierCode);
-        return accountForApplicationForm;
-    }
-
-    @Override
     public void registerAccount(AccountEntity account){
         accountRepository.save(account);
     }

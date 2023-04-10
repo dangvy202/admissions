@@ -30,7 +30,9 @@ public class StudentController {
     private CategoriesServiceImpl categoriesServiceImpl;
     private ApplicationFormServiceImpl applicationFormServiceImpl;
 
-    public StudentController(ApplicationFormServiceImpl applicationFormServiceImpl ,CategoriesServiceImpl categoriesServiceImpl , StudentOptionServiceImpl studentOptionServiceImpl , StudentEnrollServiceImpl studentEnrollServiceImpl,StudentInfoClassServiceImpl studentInfoClassServiceImpl, StudentReportServiceImpl studentReportServiceImpl,StudentServiceImpl studentServiceImpl){
+    private AccountServiceImpl accountServiceImpl;
+
+    public StudentController(AccountServiceImpl accountServiceImpl,ApplicationFormServiceImpl applicationFormServiceImpl ,CategoriesServiceImpl categoriesServiceImpl , StudentOptionServiceImpl studentOptionServiceImpl , StudentEnrollServiceImpl studentEnrollServiceImpl,StudentInfoClassServiceImpl studentInfoClassServiceImpl, StudentReportServiceImpl studentReportServiceImpl,StudentServiceImpl studentServiceImpl){
         this.studentServiceImpl = studentServiceImpl;
         this.studentReportServiceImpl = studentReportServiceImpl;
         this.studentInfoClassServiceImpl = studentInfoClassServiceImpl;
@@ -38,6 +40,7 @@ public class StudentController {
         this.studentOptionServiceImpl = studentOptionServiceImpl;
         this.categoriesServiceImpl = categoriesServiceImpl;
         this.applicationFormServiceImpl = applicationFormServiceImpl;
+        this.accountServiceImpl = accountServiceImpl;
     }
 
     @GetMapping("/get/{id}")
@@ -61,8 +64,9 @@ public class StudentController {
             StudentInfoClassEntity userInfoClass = studentInfoClassServiceImpl.setStudentInfoClass(userRequest,userReport);
             StudentEnrollEntity userEnroll = studentEnrollServiceImpl.setStudentEnroll(userRequest,userReport);
             StudentOptionEntity userOption = studentOptionServiceImpl.setStudentOption(userRequest,userReport);
-            ApplicationFormEntity applicationFormResult = applicationFormServiceImpl.setStudentEnroll(userInfo,userReport,userOption,userInfoClass,userEnroll);
-            if(!applicationFormResult.toString().isEmpty() && !userInfo.toString().isEmpty() && !userReport.toString().isEmpty() && !userInfoClass.toString().isEmpty() && !userEnroll.toString().isEmpty()){
+            AccountEntity account = accountServiceImpl.setAccountForApplicationForm(userRequest.getAccount().getIdentifierCode());
+            ApplicationFormEntity applicationFormResult = applicationFormServiceImpl.setStudentEnroll(account,userInfo,userReport,userOption,userInfoClass,userEnroll);
+            if(!account.toString().isEmpty() && !applicationFormResult.toString().isEmpty() && !userInfo.toString().isEmpty() && !userReport.toString().isEmpty() && !userInfoClass.toString().isEmpty() && !userEnroll.toString().isEmpty()){
                 studentServiceImpl.saveStudent(userInfo);
                 studentReportServiceImpl.saveStudent(userReport);
                 studentInfoClassServiceImpl.saveStudent(userInfoClass);

@@ -9,5 +9,5 @@ import java.util.List;
 public interface ApplicationFormService {
     List<ApplicationFormEntity> findEnrollInfomation(Long id);
     void saveStudent(ApplicationFormEntity applicationForm);
-    ApplicationFormEntity setStudentEnroll(AccountEntity account , StudentEntity user, StudentReportEntity userReport, StudentOptionEntity userOption, StudentInfoClassEntity userClass,StudentEnrollEntity userEnroll);
+    ApplicationFormEntity setStudentEnroll(StudentEntity user, StudentReportEntity userReport, StudentOptionEntity userOption, StudentInfoClassEntity userClass,StudentEnrollEntity userEnroll);
 }

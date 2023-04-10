@@ -21,4 +21,7 @@ public class Student{
     @JsonProperty("UserOption")
     private StudentOptionDTO userOption;
 
+    @JsonProperty("Account")
+    private AccountDTO account;
+
 }

@@ -11,5 +11,4 @@ public interface AccountService {
     void registerAccount(AccountEntity account);
     AccountEntity setAccountRequest(Account account);
     String verifyAccountRequest(String identifierCode);
-    AccountEntity setAccountForApplicationForm(String identifierCode);
 }
