@@ -1,13 +1,11 @@
-package com.sch.student.service;
+package com.sch.mgmt.service;
 
-import com.sch.student.entity.*;
+import com.sch.mgmt.entity.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public interface ApplicationFormService {
-    List<ApplicationFormEntity> findEnrollInfomation(Long id);
-    void saveStudent(ApplicationFormEntity applicationForm);
-    ApplicationFormEntity setStudentEnroll(StudentEntity user, StudentReportEntity userReport, StudentOptionEntity userOption, StudentInfoClassEntity userClass,StudentEnrollEntity userEnroll);
+    List<ApplicationFormEntity> findAllAdmissions();
 }

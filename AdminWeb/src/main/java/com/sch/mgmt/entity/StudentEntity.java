@@ -1,10 +1,12 @@
-package com.sch.student.entity;
+package com.sch.mgmt.entity;
 
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Data
@@ -31,18 +33,25 @@ public class StudentEntity implements Serializable {
     @JsonUnwrapped
     private String lastName;
 
-//    @Column(name = "password")
-//    private String password;
-//
-//    @Column(name = "verify")
-//    private int verify;
-//
-//    @Column(name = "email")
-//    private String email;
+    @Column(name = "place_of_birth")
+    @JsonUnwrapped
+    private String placeOfBirth;
+
+    @Column(name = "province")
+    @JsonUnwrapped
+    private String province;
+
+    @Column(name = "district")
+    @JsonUnwrapped
+    private String district;
 
     @Column(name = "address")
     @JsonUnwrapped
     private String address;
+
+    @Column(name = "ward")
+    @JsonUnwrapped
+    private String ward;
 
     @Column(name = "birthday")
     @JsonUnwrapped
@@ -83,4 +92,10 @@ public class StudentEntity implements Serializable {
     @Column(name = "modify_account")
     @JsonUnwrapped
     private Date modifyAccount;
+
+    public String getBirthday() {
+        DateFormat outputFormatter = new SimpleDateFormat("MM/dd/yyyy");
+        String output = outputFormatter.format(birthday); // Output : 01/20/2012
+        return output;
+    }
 }

@@ -29,6 +29,10 @@ public class StudentReportServiceImpl implements StudentReportService {
 
         StudentReportEntity userReport = StudentReportEntity.builder()
                 .schoolPassed(userRequest.getUserReport().getSchoolPassed())
+                .nameClass(userRequest.getUserReport().getNameClass())
+                .ward(userRequest.getUserReport().getWard())
+                .province(userRequest.getUserReport().getProvince())
+                .district(userRequest.getUserReport().getDistrict())
                 .schoolAddress(userRequest.getUserReport().getSchoolPassed())
                 .academicAbility(userRequest.getUserReport().getAcademicAbility())
                 .student(userInfo)

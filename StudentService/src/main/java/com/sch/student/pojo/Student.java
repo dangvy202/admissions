@@ -24,4 +24,7 @@ public class Student{
     @JsonProperty("Account")
     private AccountDTO account;
 
+    @JsonProperty("Subject")
+    private SubjectDTO subject;
+
 }

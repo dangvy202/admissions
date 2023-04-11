@@ -1,11 +1,9 @@
-package com.sch.student.repository;
+package com.sch.mgmt.repository;
 
-import com.sch.student.entity.AccountEntity;
+import com.sch.mgmt.entity.AccountEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
-import java.util.UUID;
 
 @Repository
 public interface AccountRepository extends JpaRepository<AccountEntity,Long> {

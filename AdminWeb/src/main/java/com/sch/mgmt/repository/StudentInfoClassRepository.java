@@ -1,6 +1,6 @@
-package com.sch.student.repository;
+package com.sch.mgmt.repository;
 
-import com.sch.student.entity.StudentInfoClassEntity;
+import com.sch.mgmt.entity.StudentInfoClassEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

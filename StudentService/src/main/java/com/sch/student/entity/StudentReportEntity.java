@@ -27,6 +27,22 @@ public class StudentReportEntity {
     @JsonUnwrapped
     private String schoolPassed;
 
+    @Column(name = "name_class")
+    @JsonUnwrapped
+    private String nameClass;
+
+    @Column(name = "ward")
+    @JsonUnwrapped
+    private String ward;
+
+    @Column(name = "province")
+    @JsonUnwrapped
+    private String province;
+
+    @Column(name = "district")
+    @JsonUnwrapped
+    private String district;
+
     @Column(name = "school_address")
     @JsonUnwrapped
     private String schoolAddress;

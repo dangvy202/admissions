@@ -4,15 +4,12 @@ import com.sch.student.constant.ErrorApi;
 import com.sch.student.constant.SuccessApi;
 import com.sch.student.entity.*;
 import com.sch.student.pojo.Student;
-import com.sch.student.repository.StudentEnrollRepository;
 import com.sch.student.service.Impl.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,10 +26,10 @@ public class StudentController {
     private StudentOptionServiceImpl studentOptionServiceImpl;
     private CategoriesServiceImpl categoriesServiceImpl;
     private ApplicationFormServiceImpl applicationFormServiceImpl;
-
+    private SubjectServiceImpl subjectServiceImpl;
     private AccountServiceImpl accountServiceImpl;
 
-    public StudentController(AccountServiceImpl accountServiceImpl,ApplicationFormServiceImpl applicationFormServiceImpl ,CategoriesServiceImpl categoriesServiceImpl , StudentOptionServiceImpl studentOptionServiceImpl , StudentEnrollServiceImpl studentEnrollServiceImpl,StudentInfoClassServiceImpl studentInfoClassServiceImpl, StudentReportServiceImpl studentReportServiceImpl,StudentServiceImpl studentServiceImpl){
+    public StudentController(SubjectServiceImpl subjectServiceImpl ,AccountServiceImpl accountServiceImpl,ApplicationFormServiceImpl applicationFormServiceImpl ,CategoriesServiceImpl categoriesServiceImpl , StudentOptionServiceImpl studentOptionServiceImpl , StudentEnrollServiceImpl studentEnrollServiceImpl,StudentInfoClassServiceImpl studentInfoClassServiceImpl, StudentReportServiceImpl studentReportServiceImpl,StudentServiceImpl studentServiceImpl){
         this.studentServiceImpl = studentServiceImpl;
         this.studentReportServiceImpl = studentReportServiceImpl;
         this.studentInfoClassServiceImpl = studentInfoClassServiceImpl;
@@ -41,6 +38,7 @@ public class StudentController {
         this.categoriesServiceImpl = categoriesServiceImpl;
         this.applicationFormServiceImpl = applicationFormServiceImpl;
         this.accountServiceImpl = accountServiceImpl;
+        this.subjectServiceImpl = subjectServiceImpl;
     }
 
     @GetMapping("/get/{id}")
@@ -65,9 +63,11 @@ public class StudentController {
             StudentEnrollEntity userEnroll = studentEnrollServiceImpl.setStudentEnroll(userRequest,userReport);
             StudentOptionEntity userOption = studentOptionServiceImpl.setStudentOption(userRequest,userReport);
             AccountEntity account = accountServiceImpl.setAccountForApplicationForm(userRequest.getAccount().getIdentifierCode());
-            ApplicationFormEntity applicationFormResult = applicationFormServiceImpl.setStudentEnroll(account,userInfo,userReport,userOption,userInfoClass,userEnroll);
-            if(!account.toString().isEmpty() && !applicationFormResult.toString().isEmpty() && !userInfo.toString().isEmpty() && !userReport.toString().isEmpty() && !userInfoClass.toString().isEmpty() && !userEnroll.toString().isEmpty()){
+            SubjectEntity subject = subjectServiceImpl.setSubjectInfomation(userRequest);
+            ApplicationFormEntity applicationFormResult = applicationFormServiceImpl.setStudentEnroll(subject,account,userInfo,userReport,userOption,userInfoClass,userEnroll);
+            if(!subject.toString().isEmpty() && !account.toString().isEmpty() && !applicationFormResult.toString().isEmpty() && !userInfo.toString().isEmpty() && !userReport.toString().isEmpty() && !userInfoClass.toString().isEmpty() && !userEnroll.toString().isEmpty()){
                 studentServiceImpl.saveStudent(userInfo);
+                subjectServiceImpl.saveSubject(subject);
                 studentReportServiceImpl.saveStudent(userReport);
                 studentInfoClassServiceImpl.saveStudent(userInfoClass);
                 studentEnrollServiceImpl.saveStudent(userEnroll);

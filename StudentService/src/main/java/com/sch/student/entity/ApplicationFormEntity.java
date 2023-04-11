@@ -58,6 +58,12 @@ public class ApplicationFormEntity {
     @JsonUnwrapped
     private AccountEntity schAccount;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_subject" , nullable = false)
+    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
+    @JsonUnwrapped
+    private SubjectEntity subject;
+
     @Column(name = "create_application")
     @JsonUnwrapped
     private Date createApplication;

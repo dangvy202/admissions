@@ -1,4 +1,4 @@
-package com.sch.student.entity;
+package com.sch.mgmt.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
@@ -51,6 +51,18 @@ public class ApplicationFormEntity {
     @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
     @JsonUnwrapped
     private StudentEnrollEntity schEnroll;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_account" , nullable = false)
+    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
+    @JsonUnwrapped
+    private AccountEntity account;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_subject" , nullable = false)
+    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
+    @JsonUnwrapped
+    private SubjectEntity subject;
 
     @Column(name = "create_application")
     @JsonUnwrapped

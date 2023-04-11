@@ -16,11 +16,17 @@ public class StudentDTO {
     @JsonProperty("lastName")
     private String lastName;
 
-    @JsonProperty("password")
-    private String password;
+    @JsonProperty("placeOfBirth")
+    private String placeOfBirth;
 
-    @JsonProperty("email")
-    private String email;
+    @JsonProperty("province")
+    private String province;
+
+    @JsonProperty("district")
+    private String district;
+
+    @JsonProperty("ward")
+    private String ward;
 
     @JsonProperty("address")
     private String address;

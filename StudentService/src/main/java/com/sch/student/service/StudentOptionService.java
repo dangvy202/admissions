@@ -11,5 +11,4 @@ import org.springframework.stereotype.Service;
 public interface StudentOptionService {
     void saveStudent(StudentOptionEntity studentOption);
     StudentOptionEntity setStudentOption(Student studentOption, StudentReportEntity userReport);
-    String getNameCategoryByStudentOption(Student studentOption,String aspiration);
 }

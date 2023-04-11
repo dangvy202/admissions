@@ -27,12 +27,13 @@ public class ApplicationFormServiceImpl implements ApplicationFormService {
     }
 
     @Override
-    public ApplicationFormEntity setStudentEnroll(AccountEntity account , StudentEntity user, StudentReportEntity userReport, StudentOptionEntity userOption, StudentInfoClassEntity userClass, StudentEnrollEntity userEnroll) {
+    public ApplicationFormEntity setStudentEnroll(SubjectEntity subject,AccountEntity account , StudentEntity user, StudentReportEntity userReport, StudentOptionEntity userOption, StudentInfoClassEntity userClass, StudentEnrollEntity userEnroll) {
         long millis=System.currentTimeMillis();
         Date dateNow = new Date(millis);
 
         ApplicationFormEntity applicationForm = ApplicationFormEntity.builder()
                 .schUser(user)
+                .subject(subject)
                 .schReport(userReport)
                 .schOption(userOption)
                 .schInfoClass(userClass)

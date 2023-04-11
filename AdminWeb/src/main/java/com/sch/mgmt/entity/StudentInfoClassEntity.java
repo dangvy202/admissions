@@ -1,4 +1,4 @@
-package com.sch.student.entity;
+package com.sch.mgmt.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;

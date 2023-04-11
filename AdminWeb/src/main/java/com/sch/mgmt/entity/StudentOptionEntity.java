@@ -1,4 +1,4 @@
-package com.sch.student.entity;
+package com.sch.mgmt.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
@@ -23,25 +23,61 @@ public class StudentOptionEntity {
     @JsonUnwrapped
     private Long id;
 
-    @Column(name = "aspiration_1th")
+    @Column(name = "math_cs1")
     @JsonUnwrapped
-    private String aspiration1th;
+    private int mathCS1;
 
-    @Column(name = "aspiration_2th")
+    @Column(name = "literature_cs1")
     @JsonUnwrapped
-    private String aspiration2th;
+    private String literatureCS1;
 
-    @Column(name = "aspiration_3th")
+    @Column(name = "informatics_cs1")
     @JsonUnwrapped
-    private String aspiration3th;
+    private String informaticsCS1;
 
-    @Column(name = "aspiration_4th")
+    @Column(name = "physics_cs1")
     @JsonUnwrapped
-    private String aspiration4th;
+    private String physicsCS1;
 
-    @Column(name = "aspiration_5th")
+    @Column(name = "chemistry_cs1")
     @JsonUnwrapped
-    private String aspiration5th;
+    private String chemistryCS1;
+
+    @Column(name = "biology_cs1")
+    @JsonUnwrapped
+    private String biologycs1;
+
+    @Column(name = "english_cs1")
+    @JsonUnwrapped
+    private String englishCS1;
+
+    @Column(name = "math_cs2")
+    @JsonUnwrapped
+    private int mathCS2;
+
+    @Column(name = "literature_cs2")
+    @JsonUnwrapped
+    private String literatureCS2;
+
+    @Column(name = "informatics_cs2")
+    @JsonUnwrapped
+    private String informaticsCS2;
+
+    @Column(name = "physics_cs2")
+    @JsonUnwrapped
+    private String physicsCS2;
+
+    @Column(name = "chemistry_cs2")
+    @JsonUnwrapped
+    private String chemistryCS2;
+
+    @Column(name = "biology_cs2")
+    @JsonUnwrapped
+    private String biologycs2;
+
+    @Column(name = "english_cs2")
+    @JsonUnwrapped
+    private String englishCS2;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_report" , nullable = false)

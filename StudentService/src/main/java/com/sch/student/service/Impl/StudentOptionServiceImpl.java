@@ -36,11 +36,25 @@ public class StudentOptionServiceImpl implements StudentOptionService {
         Date dateNow = new Date(millis);
 
         StudentOptionEntity studentOption = StudentOptionEntity.builder()
-                .aspiration1th(getNameCategoryByStudentOption(studentRequest,"aspiration1TH"))
-                .aspiration2th(getNameCategoryByStudentOption(studentRequest,"aspiration2TH"))
-                .aspiration3th(getNameCategoryByStudentOption(studentRequest,"aspiration3TH"))
-                .aspiration4th(getNameCategoryByStudentOption(studentRequest,"aspiration4TH"))
-                .aspiration5th(getNameCategoryByStudentOption(studentRequest,"aspiration5TH"))
+                .mathCS1(studentRequest.getUserOption().getMathCS1())
+                .literatureCS1(studentRequest.getUserOption().getLiteratureCS1())
+                .informaticsCS1(studentRequest.getUserOption().getInformaticsCS1())
+                .physicsCS1(studentRequest.getUserOption().getPhysicsCS1())
+                .chemistryCS1(studentRequest.getUserOption().getChemistryCS1())
+                .biologycs1(studentRequest.getUserOption().getBiologycs1())
+                .englishCS1(studentRequest.getUserOption().getEnglishCS1())
+                .mathCS2(studentRequest.getUserOption().getMathCS2())
+                .literatureCS2(studentRequest.getUserOption().getLiteratureCS2())
+                .informaticsCS2(studentRequest.getUserOption().getInformaticsCS2())
+                .physicsCS2(studentRequest.getUserOption().getPhysicsCS2())
+                .chemistryCS2(studentRequest.getUserOption().getChemistryCS2())
+                .biologycs2(studentRequest.getUserOption().getBiologycs2())
+                .englishCS2(studentRequest.getUserOption().getEnglishCS2())
+//                .aspiration1th(getNameCategoryByStudentOption(studentRequest,"aspiration1TH"))
+//                .aspiration2th(getNameCategoryByStudentOption(studentRequest,"aspiration2TH"))
+//                .aspiration3th(getNameCategoryByStudentOption(studentRequest,"aspiration3TH"))
+//                .aspiration4th(getNameCategoryByStudentOption(studentRequest,"aspiration4TH"))
+//                .aspiration5th(getNameCategoryByStudentOption(studentRequest,"aspiration5TH"))
 //                .category(categories)
                 .studentReport(userReport)
                 .createOption(dateNow)
@@ -49,26 +63,5 @@ public class StudentOptionServiceImpl implements StudentOptionService {
         return studentOption;
     }
 
-    @Override
-    public String getNameCategoryByStudentOption(Student studentRequest,String aspiration) {
-        CategoriesEntity categories = new CategoriesEntity();
-        switch (aspiration){
-            case "aspiration1TH":
-                categories = categoriesServiceImpl.findNameSubjectCategories(studentRequest.getUserOption().getAspiration1th());
-                break;
-            case "aspiration2TH":
-                categories = categoriesServiceImpl.findNameSubjectCategories(studentRequest.getUserOption().getAspiration2th());
-                break;
-            case "aspiration3TH":
-                categories = categoriesServiceImpl.findNameSubjectCategories(studentRequest.getUserOption().getAspiration3th());
-                break;
-            case "aspiration4TH":
-                categories = categoriesServiceImpl.findNameSubjectCategories(studentRequest.getUserOption().getAspiration4th());
-                break;
-            case "aspiration5TH":
-                categories = categoriesServiceImpl.findNameSubjectCategories(studentRequest.getUserOption().getAspiration5th());
-                break;
-        }
-        return categories.getNameSubject();
-    }
+
 }

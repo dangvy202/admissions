@@ -1,13 +1,8 @@
-package com.sch.student.service;
+package com.sch.mgmt.service;
 
-import com.sch.student.entity.StudentEntity;
-import com.sch.student.pojo.Student;
-import com.sch.student.repository.StudentRepository;
+import com.sch.mgmt.entity.StudentEntity;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface StudentService{
-    void saveStudent(StudentEntity studentInfo);
-
-    StudentEntity setUserInfomation(Student student);
 }
