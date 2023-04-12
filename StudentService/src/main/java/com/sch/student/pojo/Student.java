@@ -27,4 +27,7 @@ public class Student{
     @JsonProperty("Subject")
     private SubjectDTO subject;
 
+    @JsonProperty("ImgUser")
+    private ImgDTO img;
+
 }

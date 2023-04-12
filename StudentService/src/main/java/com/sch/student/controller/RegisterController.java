@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.InvocationTargetException;
 
 @RestController
 @RequestMapping("/account")
@@ -30,10 +31,11 @@ public class RegisterController {
         AccountEntity account = accountServiceImpl.setAccountRequest(requestRegister);
         if(account != null){
             String url = request.getRequestURL().toString();
-            accountServiceImpl.sendMailVerifyAccount(account,url.replace(request.getServletPath(), ""));
+            accountServiceImpl.sendMailVerifyAccount("Please verify your registration","TRƯỜNG THPT NĂNG KHIẾU","<p>Dear "+account.getEmail()+",</p>",account,url.replace(request.getServletPath(), ""));
             accountServiceImpl.registerAccount(account);
+            return new ResponseEntity<>(SuccessApi.REGISTER_SUCCESS,HttpStatus.EXPECTATION_FAILED);
         }
-        return null;
+        return new ResponseEntity<>(ErrorApi.EMAIL_ID_EXIST,HttpStatus.EXPECTATION_FAILED);
     }
     @PostMapping("/register/verify")
     public ResponseEntity<String> verifyAccount(@RequestParam("code") String code){

@@ -95,28 +95,42 @@ public class AccountServiceImpl implements AccountService {
         }
     }
 
-    public void sendMailVerifyAccount(AccountEntity account,String url) throws MessagingException, UnsupportedEncodingException {
-        String subject = "Please verify your registration";
-        String senderName="Net Movie";
-        String contentMail = "<p>Dear " + account.getEmail()+",</p>";
-        contentMail += "<p>Please click the link below to verify to you registration</p>";
+    public void sendMailVerifyAccount(String subject,String senderName,String contentMail,AccountEntity account,String url) throws MessagingException, UnsupportedEncodingException {
+        if(!url.isEmpty()){
+            contentMail += "<p>Please click the link below to verify to you registration</p>";
 
-        //get url verification
-        String verifyURL = url + "/account/register/verify?code=" + account.getVerify();
-        //end
+            //get url verification
+            String verifyURL = url + "/account/register/verify?code=" + account.getVerify();
+            //end
 
-        contentMail += "<h3> <a href=\"" + verifyURL + "\">VERIFY ACCOUNT</a></h3>";
+            contentMail += "<h3> <a href=\"" + verifyURL + "\">VERIFY ACCOUNT</a></h3>";
 
-        contentMail += "<p>Thanks you.</p>";
+            contentMail += "<p>Thanks you.</p>";
 
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message);
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message);
 
-        helper.setFrom(account.getEmail(),senderName);
-        helper.setTo(account.getEmail());
-        helper.setSubject(subject);
-        helper.setText(contentMail,true);
+            helper.setFrom(account.getEmail(),senderName);
+            helper.setTo(account.getEmail());
+            helper.setSubject(subject);
+            helper.setText(contentMail,true);
 
-        mailSender.send(message);
+            mailSender.send(message);
+        }else{
+            contentMail += "<p>BẠN ĐÃ ĐĂNG KÝ XÉT TUYỂN THÀNH CÔNG</p>";
+
+            contentMail += "<p>Thanks you.</p>";
+
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message);
+
+            helper.setFrom(account.getEmail(),senderName);
+            helper.setTo(account.getEmail());
+            helper.setSubject(subject);
+            helper.setText(contentMail,true);
+
+            mailSender.send(message);
+        }
+
     }
 }

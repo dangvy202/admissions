@@ -2,14 +2,21 @@ package com.sch.student.controller;
 
 import com.sch.student.constant.ErrorApi;
 import com.sch.student.constant.SuccessApi;
+import com.sch.student.dto.ImgDTO;
 import com.sch.student.entity.*;
 import com.sch.student.pojo.Student;
 import com.sch.student.service.Impl.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.*;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,8 +35,9 @@ public class StudentController {
     private ApplicationFormServiceImpl applicationFormServiceImpl;
     private SubjectServiceImpl subjectServiceImpl;
     private AccountServiceImpl accountServiceImpl;
+    private ImgServiceImpl imgServiceImpl;
 
-    public StudentController(SubjectServiceImpl subjectServiceImpl ,AccountServiceImpl accountServiceImpl,ApplicationFormServiceImpl applicationFormServiceImpl ,CategoriesServiceImpl categoriesServiceImpl , StudentOptionServiceImpl studentOptionServiceImpl , StudentEnrollServiceImpl studentEnrollServiceImpl,StudentInfoClassServiceImpl studentInfoClassServiceImpl, StudentReportServiceImpl studentReportServiceImpl,StudentServiceImpl studentServiceImpl){
+    public StudentController(ImgServiceImpl imgServiceImpl,SubjectServiceImpl subjectServiceImpl ,AccountServiceImpl accountServiceImpl,ApplicationFormServiceImpl applicationFormServiceImpl ,CategoriesServiceImpl categoriesServiceImpl , StudentOptionServiceImpl studentOptionServiceImpl , StudentEnrollServiceImpl studentEnrollServiceImpl,StudentInfoClassServiceImpl studentInfoClassServiceImpl, StudentReportServiceImpl studentReportServiceImpl,StudentServiceImpl studentServiceImpl){
         this.studentServiceImpl = studentServiceImpl;
         this.studentReportServiceImpl = studentReportServiceImpl;
         this.studentInfoClassServiceImpl = studentInfoClassServiceImpl;
@@ -39,6 +47,7 @@ public class StudentController {
         this.applicationFormServiceImpl = applicationFormServiceImpl;
         this.accountServiceImpl = accountServiceImpl;
         this.subjectServiceImpl = subjectServiceImpl;
+        this.imgServiceImpl = imgServiceImpl;
     }
 
     @GetMapping("/get/{id}")
@@ -73,6 +82,10 @@ public class StudentController {
                 studentEnrollServiceImpl.saveStudent(userEnroll);
                 studentOptionServiceImpl.saveStudent(userOption);
                 applicationFormServiceImpl.saveStudent(applicationFormResult);
+                //send mail when success admission
+                accountServiceImpl.sendMailVerifyAccount("ĐĂNG KÝ TUYỂN SINH THÀNH CÔNG","TRƯỜNG THPT NĂNG KHIẾU","<p>Dear "+account.getEmail()+",</p>",account,"");
+
+
                 return new ResponseEntity<>(SuccessApi.SCH_SUCCESS_SAVE,HttpStatus.CREATED);
             }
             else {
@@ -82,5 +95,20 @@ public class StudentController {
         catch(Exception ex){
             return new ResponseEntity<>(ErrorApi.SCH_ERROR_REQ_EMPTY,HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @PostMapping("/img")
+    public void upload(@RequestParam("identifierCode") String identifierCode,@RequestParam("imgFront") MultipartFile imgFront,@RequestParam("imgBack") MultipartFile imgBack , @RequestParam("imgUser") MultipartFile imgUser) throws IOException {
+        AccountEntity account = accountServiceImpl.setAccountForApplicationForm(identifierCode);
+        imgServiceImpl.uploadImgInFolder(account,imgFront,imgBack,imgUser);
+    }
+
+
+    @GetMapping("/img/download/{id}")
+    @ResponseBody
+    public ResponseEntity<?> showImage(@PathVariable("id") Long id)
+            throws ServletException, IOException {
+        byte[] img = imgServiceImpl.downloadImg(id);
+        return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("image/png")).body(img);
     }
 }
