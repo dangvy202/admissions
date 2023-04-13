@@ -65,7 +65,7 @@ public class StudentController {
 
     @PostMapping("/setInfo")
     public ResponseEntity<String> saveInfoStudent(@RequestBody Student userRequest) throws Exception {
-        try{
+
             StudentEntity userInfo = studentServiceImpl.setUserInfomation(userRequest);
             StudentReportEntity userReport = studentReportServiceImpl.setStudentReport(userRequest,userInfo);
             StudentInfoClassEntity userInfoClass = studentInfoClassServiceImpl.setStudentInfoClass(userRequest,userReport);
@@ -91,10 +91,7 @@ public class StudentController {
             else {
                 return new ResponseEntity<>(ErrorApi.SCH_ERROR_EMPTY, HttpStatus.OK);
             }
-        }
-        catch(Exception ex){
-            return new ResponseEntity<>(ErrorApi.SCH_ERROR_REQ_EMPTY,HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+
     }
 
     @PostMapping("/img")

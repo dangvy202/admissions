@@ -23,67 +23,79 @@ public class StudentOptionEntity {
     @JsonUnwrapped
     private Long id;
 
-    @Column(name = "math_cs1")
+    @Column(name = "math")
     @JsonUnwrapped
-    private int mathCS1;
+    private int math;
 
-    @Column(name = "literature_cs1")
+    @Column(name = "informatics_informatics")
     @JsonUnwrapped
-    private String literatureCS1;
+    private int informaticsInformatics;
 
-    @Column(name = "informatics_cs1")
+    @Column(name = "informatics_math")
     @JsonUnwrapped
-    private String informaticsCS1;
+    private int informaticsMath;
 
-    @Column(name = "physics_cs1")
+    @Column(name = "physics_physics")
     @JsonUnwrapped
-    private String physicsCS1;
+    private int physicsPhysics;
 
-    @Column(name = "chemistry_cs1")
-    @JsonUnwrapped
-    private String chemistryCS1;
 
-    @Column(name = "biology_cs1")
+    @Column(name = "physics_math")
     @JsonUnwrapped
-    private String biologycs1;
+    private int physicsMath;
 
-    @Column(name = "english_cs1")
+    @Column(name = "chemistry")
     @JsonUnwrapped
-    private String englishCS1;
+    private int chemistry;
 
-    @Column(name = "math_cs2")
+    @Column(name = "biology")
     @JsonUnwrapped
-    private int mathCS2;
+    private int biology;
 
-    @Column(name = "literature_cs2")
+    @Column(name = "english")
     @JsonUnwrapped
-    private String literatureCS2;
+    private int english;
 
-    @Column(name = "informatics_cs2")
+    @Column(name = "literature")
     @JsonUnwrapped
-    private String informaticsCS2;
+    private int literature;
 
-    @Column(name = "physics_cs2")
+    @Column(name = "math_ln")
     @JsonUnwrapped
-    private String physicsCS2;
+    private int mathLN;
 
-    @Column(name = "chemistry_cs2")
+    @Column(name = "physics_physics_ln")
     @JsonUnwrapped
-    private String chemistryCS2;
+    private int physicsPhysicsLN;
 
-    @Column(name = "biology_cs2")
+    @Column(name = "physics_math_ln")
     @JsonUnwrapped
-    private String biologycs2;
+    private int physicsMathLN;
 
-    @Column(name = "english_cs2")
+    @Column(name = "chemistry_chemistry_ln")
     @JsonUnwrapped
-    private String englishCS2;
+    private int chemistryChemistryLN;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_report" , nullable = false)
-    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
+    @Column(name = "chemistry_math_ln")
     @JsonUnwrapped
-    private StudentReportEntity studentReport;
+    private int chemistryMathLN;
+
+    @Column(name = "biology_biology_ln")
+    @JsonUnwrapped
+    private int biologyBiologyLN;
+
+
+    @Column(name = "biology_math_ln")
+    @JsonUnwrapped
+    private int biologyMathLN;
+
+    @Column(name = "english_ln")
+    @JsonUnwrapped
+    private int englishLN;
+
+    @Column(name = "literature_ln")
+    @JsonUnwrapped
+    private int literatureLN;
 
     @Column(name = "create_option")
     @JsonUnwrapped
@@ -92,4 +104,10 @@ public class StudentOptionEntity {
     @Column(name = "modify_option")
     @JsonUnwrapped
     private Date modifyOption;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_report" , nullable = false)
+    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
+    @JsonUnwrapped
+    private StudentReportEntity report;
 }

@@ -10,46 +10,61 @@ import lombok.Setter;
 @Setter
 public class StudentOptionDTO {
 
-    @JsonProperty("mathCS1")
-    private int mathCS1;
 
-    @JsonProperty("literatureCS1")
-    private String literatureCS1;
+    @JsonProperty("math")
+    private int math;
 
-    @JsonProperty("informaticsCS1")
-    private String informaticsCS1;
+    @JsonProperty("informaticsInformatics")
+    private int informaticsInformatics;
 
-    @JsonProperty("physicsCS1")
-    private String physicsCS1;
+    @JsonProperty("informaticsMath")
+    private int informaticsMath;
 
-    @JsonProperty("chemistryCS1")
-    private String chemistryCS1;
+    @JsonProperty("physicsPhysics")
+    private int physicsPhysics;
 
-    @JsonProperty("biologycs1")
-    private String biologycs1;
 
-    @JsonProperty("englishCS1")
-    private String englishCS1;
+    @JsonProperty("physicsMath")
+    private int physicsMath;
 
-    @JsonProperty("mathCS2")
-    private int mathCS2;
+    @JsonProperty("chemistry")
+    private int chemistry;
 
-    @JsonProperty("literatureCS2")
-    private String literatureCS2;
+    @JsonProperty("biology")
+    private int biology;
 
-    @JsonProperty("informaticsCS2")
-    private String informaticsCS2;
+    @JsonProperty("english")
+    private int english;
 
-    @JsonProperty("physicsCS2")
-    private String physicsCS2;
+    @JsonProperty("literature")
+    private int literature;
 
-    @JsonProperty("chemistryCS2")
-    private String chemistryCS2;
+    @JsonProperty("mathLN")
+    private int mathLN;
 
-    @JsonProperty("biologycs2")
-    private String biologycs2;
+    @JsonProperty("physicsPhysicsLN")
+    private int physicsPhysicsLN;
 
-    @JsonProperty("englishCS2")
-    private String englishCS2;
+    @JsonProperty("physicsMathLN")
+    private int physicsMathLN;
+
+    @JsonProperty("chemistryChemistryLN")
+    private int chemistryChemistryLN;
+
+    @JsonProperty("chemistryMathLN")
+    private int chemistryMathLN;
+
+    @JsonProperty("biologyBiologyLN")
+    private int biologyBiologyLN;
+
+    @JsonProperty("biologyMathLN")
+    private int biologyMathLN;
+
+    @JsonProperty("englishLN")
+    private int englishLN;
+
+    @JsonProperty("literatureLN")
+    private int literatureLN;
+
 
 }
