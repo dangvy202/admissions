@@ -110,4 +110,25 @@ public class StudentOptionEntity {
     @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
     @JsonUnwrapped
     private StudentReportEntity report;
+
+    public void update(StudentOptionEntity studentOption){
+        setBiology(studentOption.getBiology());
+        setBiologyBiologyLN(studentOption.getBiologyBiologyLN());
+        setBiologyMathLN(studentOption.getBiologyMathLN());
+        setChemistry(studentOption.getChemistry());
+        setChemistryChemistryLN(studentOption.getChemistryChemistryLN());
+        setChemistryMathLN(studentOption.getChemistryMathLN());
+        setEnglish(studentOption.getEnglish());
+        setEnglishLN(studentOption.getEnglishLN());
+        setInformaticsInformatics(studentOption.getInformaticsInformatics());
+        setInformaticsMath(studentOption.getInformaticsMath());
+        setLiterature(studentOption.getLiterature());
+        setLiteratureLN(studentOption.getLiteratureLN());
+        setMath(studentOption.getMath());
+        setMathLN(studentOption.getMathLN());
+        setPhysicsMath(studentOption.getPhysicsMath());
+        setPhysicsMathLN(studentOption.getPhysicsMathLN());
+        setPhysicsPhysics(studentOption.getPhysicsPhysics());
+        setPhysicsPhysicsLN(studentOption.getPhysicsPhysicsLN());
+    }
 }

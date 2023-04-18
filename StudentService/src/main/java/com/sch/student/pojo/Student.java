@@ -3,8 +3,10 @@ package com.sch.student.pojo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sch.student.dto.*;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class Student{
     @JsonProperty("UserInfo")
     private StudentDTO userInfo;

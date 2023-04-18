@@ -3,11 +3,13 @@ package com.sch.student.service.Impl;
 import com.sch.student.configuration.TokenVerifyAccount;
 import com.sch.student.constant.ErrorApi;
 import com.sch.student.constant.SuccessApi;
+import com.sch.student.dto.AccountDTO;
 import com.sch.student.entity.AccountEntity;
 import com.sch.student.pojo.Account;
 import com.sch.student.pojo.Student;
 import com.sch.student.repository.AccountRepository;
 import com.sch.student.service.AccountService;
+import jakarta.annotation.Nullable;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -28,6 +31,11 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private JavaMailSender mailSender;
+
+    @Override
+    public Optional<AccountEntity> findAccountById(Long id){
+        return accountRepository.findById(id);
+    }
 
     @Override
     public AccountEntity setAccountForApplicationForm(String identifierCode){
@@ -41,7 +49,8 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountEntity setAccountRequest(Account account){
+    //CHECK IF BOOLEAN == TRUE USE ACCOUNT TYPE , IF BOOLEAN == FALSE ACCOUNT ENTITY
+    public AccountEntity setAccountRequest(@Nullable Account account,@Nullable AccountDTO accountDTO){
         //Encode password
         PasswordEncoder encrypted = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
@@ -49,35 +58,46 @@ public class AccountServiceImpl implements AccountService {
         long millis=System.currentTimeMillis();
         Date dateNow = new Date(millis);
 
-        //set token verify
-        TokenVerifyAccount tokenVerifyAccount = new TokenVerifyAccount();
-        String tokenInsert =  tokenVerifyAccount.randomTokenVerify();
-
-        //check identifier code
-        AccountEntity checkIdentifierCode = accountRepository.checkIdentifierCodeAccount(account.getAccount().getIdentifierCode());
-
-        //check verify
-        AccountEntity checkVerify = accountRepository.checkVerifyAccount(tokenInsert);
-
-        //check email
-        AccountEntity checkEmail = accountRepository.checkEmail(account.getAccount().getEmail());
-
         AccountEntity accountRegister = new AccountEntity();
-        if(!tokenInsert.isEmpty() && checkIdentifierCode == null && checkVerify == null && checkEmail == null){
+        if(account != null){
+            //set token verify
+            TokenVerifyAccount tokenVerifyAccount = new TokenVerifyAccount();
+            String tokenInsert =  tokenVerifyAccount.randomTokenVerify();
+
+            //check identifier code
+            AccountEntity checkIdentifierCode = accountRepository.checkIdentifierCodeAccount(account.getAccount().getIdentifierCode());
+
+            //check verify
+            AccountEntity checkVerify = accountRepository.checkVerifyAccount(tokenInsert);
+
+            if(!tokenInsert.isEmpty() && checkIdentifierCode == null && checkVerify == null){
+                accountRegister = AccountEntity.builder()
+                        .email(account.getAccount().getEmail())
+                        .passWord(encrypted.encode(account.getAccount().getPassword()))
+                        .status(0)
+                        .verify(tokenInsert)
+                        .identifierCode(account.getAccount().getIdentifierCode())
+                        .enable(0)
+                        .role("USER")
+                        .createAccount(dateNow)
+                        .modifyAccount(dateNow)
+                        .build();
+                return accountRegister;
+            }else {
+                return null;
+            }
+        }else if(accountDTO != null){
+            //set account dto
             accountRegister = AccountEntity.builder()
-                    .email(account.getAccount().getEmail())
-                    .passWord(encrypted.encode(account.getAccount().getPassword()))
-                    .status(0)
-                    .verify(tokenInsert)
-                    .identifierCode(account.getAccount().getIdentifierCode())
-                    .enable(0)
-                    .role("USER")
+                    .email(accountDTO.getEmail())
+                    .passWord(encrypted.encode(accountDTO.getPassword()))
+                    .identifierCode(accountDTO.getIdentifierCode())
                     .createAccount(dateNow)
                     .modifyAccount(dateNow)
                     .build();
             return accountRegister;
         }else {
-            return accountRegister;
+            return null;
         }
     }
 

@@ -65,4 +65,17 @@ public class StudentReportEntity {
     @Column(name = "modify_report")
     @JsonUnwrapped
     private Date modifyReport;
+
+    public void update(StudentReportEntity studentReport){
+        setSchoolPassed(studentReport.getSchoolPassed());
+        setNameClass(studentReport.getNameClass());
+        setProvince(studentReport.getProvince());
+        setDistrict(studentReport.getDistrict());
+        setWard(studentReport.getWard());
+        setSchoolAddress(studentReport.getSchoolAddress());
+        setAcademicAbility(studentReport.getAcademicAbility());
+        setStudent(studentReport.getStudent());
+        setCreateReport(studentReport.getCreateReport());
+        setModifyReport(studentReport.getModifyReport());
+    }
 }

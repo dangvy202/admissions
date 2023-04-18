@@ -32,6 +32,11 @@ public class ImgServiceImpl implements ImgService {
     }
 
     @Override
+    public  ImgInfomationEntity findImgByAccountId(Long id){
+        return imgInfoRepository.findImgByAccountId(id);
+    }
+
+    @Override
     public void uploadImgInFolder(AccountEntity account ,MultipartFile imgFront, MultipartFile imgBack, MultipartFile imgUser) throws IOException {
         ImgInfomationEntity img = ImgInfomationEntity.builder()
                 .namePathFront(ImageUtils.compressImage(imgFront.getBytes()))
@@ -44,8 +49,30 @@ public class ImgServiceImpl implements ImgService {
         imgInfoRepository.save(img);
     }
 
+    public void saveImg(ImgInfomationEntity img){
+        imgInfoRepository.save(img);
+    }
+
+    public ImgInfomationEntity setImgInFolder(AccountEntity account ,MultipartFile imgFront, MultipartFile imgBack, MultipartFile imgUser) throws IOException {
+        ImgInfomationEntity img = ImgInfomationEntity.builder()
+                .namePathFront(ImageUtils.compressImage(imgFront.getBytes()))
+                .namePathBack(ImageUtils.compressImage(imgBack.getBytes()))
+                .namePathUser(ImageUtils.compressImage(imgUser.getBytes()))
+                .type(imgFront.getContentType())
+                .nameImg(imgFront.getOriginalFilename())
+                .account(account)
+                .build();
+        return img;
+    }
+
     @Override
     public byte[] downloadImg(Long id){
+        ImgInfomationEntity imgage = findImgById(id);
+        byte[] img = ImageUtils.decompressImage(imgage.getNamePathFront());
+        return img;
+    }
+
+    public byte[] downloadImgAll(Long id , byte[] file){
         ImgInfomationEntity imgage = findImgById(id);
         byte[] img = ImageUtils.decompressImage(imgage.getNamePathFront());
         return img;

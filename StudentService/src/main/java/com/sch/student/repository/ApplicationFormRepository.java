@@ -10,5 +10,9 @@ import java.util.List;
 @Repository
 public interface ApplicationFormRepository extends JpaRepository<ApplicationFormEntity,Long> {
     @Query("SELECT a FROM ApplicationFormEntity a WHERE a.schUser.id = :id AND a.schReport.id = :id AND a.schOption.id = :id AND a.schInfoClass.id = :id AND a.schEnroll.id = :id")
-    List<ApplicationFormEntity> findEnrollInfomation(Long id);
+    ApplicationFormEntity findEnrollInfomation(Long id);
+
+    @Query("SELECT a FROM ApplicationFormEntity a WHERE a.schUser.id = :id")
+    List<ApplicationFormEntity> findApplicationByAccountId(Long id);
+
 }

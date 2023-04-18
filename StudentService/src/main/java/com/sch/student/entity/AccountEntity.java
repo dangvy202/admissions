@@ -59,4 +59,13 @@ public class AccountEntity {
     @JsonUnwrapped
     private Date modifyAccount;
 
+
+    public void update(AccountEntity account){
+        setEmail(account.getEmail());
+        setPassWord(account.getPassWord());
+        setIdentifierCode(account.getIdentifierCode());
+        setCreateAccount(account.getCreateAccount());
+        setModifyAccount(account.getModifyAccount());
+    }
+
 }

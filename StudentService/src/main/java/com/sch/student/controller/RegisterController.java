@@ -28,7 +28,7 @@ public class RegisterController {
     }
     @PostMapping("/register")
     public ResponseEntity<String> registerAccount(@RequestBody Account requestRegister, HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
-        AccountEntity account = accountServiceImpl.setAccountRequest(requestRegister);
+        AccountEntity account = accountServiceImpl.setAccountRequest(requestRegister,null);
         if(account != null){
             String url = request.getRequestURL().toString();
             accountServiceImpl.sendMailVerifyAccount("Please verify your registration","TRƯỜNG THPT NĂNG KHIẾU","<p>Dear "+account.getEmail()+",</p>",account,url.replace(request.getServletPath(), ""));

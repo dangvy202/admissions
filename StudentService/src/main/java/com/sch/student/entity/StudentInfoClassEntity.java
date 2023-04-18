@@ -68,4 +68,17 @@ public class StudentInfoClassEntity {
     @Column(name = "modify_info_class")
     @JsonUnwrapped
     private Date modifyInfoClass;
+
+    public void update(StudentInfoClassEntity infoClassUpdate){
+        setGrade6TH(infoClassUpdate.getGrade6TH());
+        setGrade7TH(infoClassUpdate.getGrade7TH());
+        setGrade8TH(infoClassUpdate.getGrade8TH());
+        setGrade9TH(infoClassUpdate.getGrade9TH());
+        setConductCertificate6TH(infoClassUpdate.getConductCertificate6TH());
+        setConductCertificate7TH(infoClassUpdate.getConductCertificate7TH());
+        setConductCertificate8TH(infoClassUpdate.getConductCertificate8TH());
+        setConductCertificate9TH(infoClassUpdate.getConductCertificate9TH());
+        setCreateInfoClass(infoClassUpdate.getCreateInfoClass());
+        setModifyInfoClass(infoClassUpdate.getModifyInfoClass());
+    }
 }

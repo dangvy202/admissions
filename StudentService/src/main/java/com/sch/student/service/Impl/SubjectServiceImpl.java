@@ -6,6 +6,8 @@ import com.sch.student.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class SubjectServiceImpl implements com.sch.student.service.SubjectService {
 
@@ -15,6 +17,11 @@ public class SubjectServiceImpl implements com.sch.student.service.SubjectServic
     @Override
     public void saveSubject(SubjectEntity subject) {
         subjectRepository.save(subject);
+    }
+
+    @Override
+    public Optional<SubjectEntity> findSubjectById(Long id){
+        return subjectRepository.findById(id);
     }
 
     @Override

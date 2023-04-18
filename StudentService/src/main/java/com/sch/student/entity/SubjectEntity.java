@@ -37,4 +37,14 @@ public class SubjectEntity {
 
     @Column(name = "english")
     private int english;
+
+    public void update(SubjectEntity subject){
+        setMath(subject.getMath());
+        setLiterature(subject.getLiterature());
+        setInformatics(subject.getInformatics());
+        setPhysics(subject.getPhysics());
+        setChemistry(subject.getChemistry());
+        setBiology(subject.getBiology());
+        setEnglish(subject.getEnglish());
+    }
 }

@@ -5,11 +5,11 @@ import com.sch.student.entity.StudentReportEntity;
 import com.sch.student.pojo.Student;
 import com.sch.student.repository.StudentEnrollRepository;
 import com.sch.student.service.StudentEnrollService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class StudentEnrollServiceImpl implements StudentEnrollService {
@@ -20,6 +20,11 @@ public class StudentEnrollServiceImpl implements StudentEnrollService {
     @Override
     public void saveStudent(StudentEnrollEntity studentEnroll) {
         studentEnrollRepository.save(studentEnroll);
+    }
+
+    @Override
+    public Optional<StudentEnrollEntity> findEnrollById(Long id){
+        return studentEnrollRepository.findById(id);
     }
 
     @Override

@@ -16,9 +16,14 @@ public class ApplicationFormServiceImpl implements ApplicationFormService {
     private ApplicationFormRepository applicationFormRepository;
 
     @Override
-    public List<ApplicationFormEntity> findEnrollInfomation(Long id){
-        List<ApplicationFormEntity> applicationFormInfomation = applicationFormRepository.findEnrollInfomation(id);
+    public ApplicationFormEntity findEnrollInfomation(Long id){
+        ApplicationFormEntity applicationFormInfomation = applicationFormRepository.findEnrollInfomation(id);
         return applicationFormInfomation;
+    }
+
+    public List<ApplicationFormEntity> findApplicationByAccountId(Long id){
+        List<ApplicationFormEntity> app = applicationFormRepository.findApplicationByAccountId(id);
+        return app;
     }
 
     @Override

@@ -90,4 +90,24 @@ public class StudentEntity implements Serializable {
     @Column(name = "modify_account")
     @JsonUnwrapped
     private Date modifyAccount;
+
+    public void update(StudentEntity schUser){
+        setFirstName(schUser.getFirstName());
+        setLastName(schUser.getLastName());
+        setPlaceOfBirth(schUser.getPlaceOfBirth());
+        setProvince(schUser.getProvince());
+        setDistrict(schUser.getDistrict());
+        setWard(schUser.getWard());
+        setAddress(schUser.getAddress());
+        setBirthday(schUser.getBirthday());
+        setSex(schUser.getSex());
+        setEthnicity(schUser.getEthnicity());
+        setIdentifyInfo(schUser.getIdentifyInfo());
+        setNationality(schUser.getNationality());
+        setPhoneNumber(schUser.getPhoneNumber());
+        setLandlinePhoneNumber(schUser.getLandlinePhoneNumber());
+        setOptionPhone(schUser.getOptionPhone());
+        setCreateAccount(schUser.getCreateAccount());
+        setModifyAccount(schUser.getModifyAccount());
+    }
 }

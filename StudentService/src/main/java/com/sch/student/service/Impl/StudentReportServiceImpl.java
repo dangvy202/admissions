@@ -4,12 +4,12 @@ import com.sch.student.entity.StudentEntity;
 import com.sch.student.entity.StudentReportEntity;
 import com.sch.student.pojo.Student;
 import com.sch.student.repository.StudentReportRepository;
-import com.sch.student.repository.StudentRepository;
 import com.sch.student.service.StudentReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class StudentReportServiceImpl implements StudentReportService {
@@ -20,6 +20,11 @@ public class StudentReportServiceImpl implements StudentReportService {
     @Override
     public void saveStudent(StudentReportEntity studentReport){
         studentRepository.save(studentReport);
+    }
+
+    @Override
+    public Optional<StudentReportEntity> findReportById(Long id){
+        return studentRepository.findById(id);
     }
 
     @Override

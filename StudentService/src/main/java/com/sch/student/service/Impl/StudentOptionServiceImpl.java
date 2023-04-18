@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -28,6 +29,11 @@ public class StudentOptionServiceImpl implements StudentOptionService {
     @Override
     public void saveStudent(StudentOptionEntity studentOption) {
         studentOptionRepository.save(studentOption);
+    }
+
+    @Override
+    public Optional<StudentOptionEntity> findOptionById(Long id){
+        return studentOptionRepository.findById(id);
     }
 
     @Override

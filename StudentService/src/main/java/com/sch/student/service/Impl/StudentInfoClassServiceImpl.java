@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class StudentInfoClassServiceImpl implements StudentInfoClassService {
@@ -18,6 +19,11 @@ public class StudentInfoClassServiceImpl implements StudentInfoClassService {
     @Override
     public void saveStudent(StudentInfoClassEntity studentInfo) {
         studentInfoClassRepository.save(studentInfo);
+    }
+
+    @Override
+    public Optional<StudentInfoClassEntity> findInfoClassById(Long id){
+        return studentInfoClassRepository.findById(id);
     }
 
     @Override

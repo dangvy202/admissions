@@ -47,4 +47,21 @@ public class StudentEnrollEntity {
     @JsonUnwrapped
     private Date modifyEnroll;
 
+    public void update(StudentEnrollEntity enrollUpdate){
+        if(enrollUpdate.getStudentReport() != null){
+
+        }
+        if(enrollUpdate.getCreateEnroll() != null){
+            setCreateEnroll(enrollUpdate.getCreateEnroll());
+        }
+        if(enrollUpdate.getModifyEnroll() != null){
+            setModifyEnroll(enrollUpdate.getModifyEnroll());
+        }
+        if(enrollUpdate.getOtherSubject2th() != null){
+            setOtherSubject2th(enrollUpdate.getOtherSubject2th());
+        }
+        if(enrollUpdate.getOtherSubject1th() != null){
+            setOtherSubject1th(enrollUpdate.getOtherSubject1th());
+        }
+    }
 }

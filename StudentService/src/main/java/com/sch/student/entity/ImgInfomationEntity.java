@@ -43,4 +43,10 @@ public class ImgInfomationEntity {
     @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
     @JsonUnwrapped
     private AccountEntity account;
+
+    public void update(ImgInfomationEntity img){
+        setNamePathFront(img.getNamePathFront());
+        setNamePathBack(img.getNamePathBack());
+        setNamePathUser(img.getNamePathUser());
+    }
 }
