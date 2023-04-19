@@ -15,6 +15,7 @@ import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -52,7 +53,7 @@ public class AccountServiceImpl implements AccountService {
     //CHECK IF BOOLEAN == TRUE USE ACCOUNT TYPE , IF BOOLEAN == FALSE ACCOUNT ENTITY
     public AccountEntity setAccountRequest(@Nullable Account account,@Nullable AccountDTO accountDTO){
         //Encode password
-        PasswordEncoder encrypted = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        PasswordEncoder encrypted = new BCryptPasswordEncoder();
 
         //date now
         long millis=System.currentTimeMillis();
