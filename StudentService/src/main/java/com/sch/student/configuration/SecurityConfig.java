@@ -40,9 +40,7 @@ public class SecurityConfig {
                 .exceptionHandling(c -> c.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
                 .authorizeHttpRequests(authorize -> authorize
 //                       ACCOUNT DONT NEED TOKEN
-                        .requestMatchers(HttpMethod.POST,"/account/register").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/account/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/register/verify").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/account/**").permitAll()
                         //NEED TOKEN
                         .requestMatchers(HttpMethod.POST, "/admission/**").hasRole("USER")
                         .requestMatchers(HttpMethod.GET, "/admission/**").hasRole("USER")

@@ -2,6 +2,7 @@ package com.sch.student.controller;
 
 import com.sch.student.constant.ErrorApi;
 import com.sch.student.constant.SuccessApi;
+import com.sch.student.dto.AccountDTO;
 import com.sch.student.entity.AccountEntity;
 import com.sch.student.pojo.Account;
 import com.sch.student.repository.AccountRepository;
@@ -19,6 +20,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
+
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
@@ -38,6 +42,42 @@ public class RegisterController {
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
         this.users = users;
+    }
+
+    @PostMapping("/forgot")
+    public ResponseEntity<String> forgotPWController(@RequestParam("id") String identifierCode) throws MessagingException, UnsupportedEncodingException {
+        //random password for student
+        String newPassword = UUID.randomUUID().toString().replace("-","");
+
+
+        //find account
+        AccountEntity accountInfo = accountServiceImpl.findAccountByIdentifierCode(identifierCode);
+        if(accountInfo != null){
+            String email = accountInfo.getEmail();
+            String html = "<p>User ID: " + identifierCode +"</p></br>";
+            html       += "<p>Temporary Password :"+ newPassword +"</p></br>";
+            accountServiceImpl.sendMailVerifyAccount(html,"FORGOT PASSWORD","TRƯỜNG THPT NĂNG KHIẾU","<p>Dear "+email+",</p>",accountInfo,"","FORGOT");
+
+
+            //update password
+
+            //set table sch_account
+            AccountDTO accountSet = new AccountDTO();
+            accountSet.setEmail(email);
+            accountSet.setPassword(newPassword);
+            accountSet.setIdentifierCode(identifierCode);
+            AccountEntity schAccountSet = accountServiceImpl.setAccountRequest(null,accountSet);
+
+            //Map Student into Entity Enroll
+            accountInfo.update(schAccountSet);
+
+            //save account
+            accountServiceImpl.registerAccount(accountInfo);
+            return new ResponseEntity<>("PASSWORD CHANGE, PLEASE CHECK MAIL",HttpStatus.OK);
+
+        }else{
+            return new ResponseEntity<>("WRONG ID",HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/login")
@@ -62,7 +102,7 @@ public class RegisterController {
         AccountEntity account = accountServiceImpl.setAccountRequest(requestRegister,null);
         if(account != null){
             String url = request.getRequestURL().toString();
-            accountServiceImpl.sendMailVerifyAccount("Please verify your registration","TRƯỜNG THPT NĂNG KHIẾU","<p>Dear "+account.getEmail()+",</p>",account,url.replace(request.getServletPath(), ""));
+            accountServiceImpl.sendMailVerifyAccount("","Please verify your registration","TRƯỜNG THPT NĂNG KHIẾU","<p>Dear "+account.getEmail()+",</p>",account,url.replace(request.getServletPath(), ""),"");
             accountServiceImpl.registerAccount(account);
             return new ResponseEntity<>(SuccessApi.REGISTER_SUCCESS,HttpStatus.EXPECTATION_FAILED);
         }

@@ -23,7 +23,7 @@ public class AdmissionAdminController {
     @RequestMapping("admission/admin")
     public String listAdmissionController(Model model){
         List<ApplicationFormEntity> listApplicationForm = applicationFormServiceImpl.findAllAdmissions();
-
+        
         model.addAttribute("applicationForm" , listApplicationForm);
         return "template/admin/admission/list";
     }

@@ -33,6 +33,11 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private JavaMailSender mailSender;
 
+    public AccountEntity findAccountByIdentifierCode(String id){
+        return accountRepository.checkIdentifierCodeAccount(id);
+    }
+
+
     @Override
     public Optional<AccountEntity> findAccountById(Long id){
         return accountRepository.findById(id);
@@ -110,13 +115,14 @@ public class AccountServiceImpl implements AccountService {
             getDetailAccountInfo.setStatus(1);
             getDetailAccountInfo.setEnable(1);
             registerAccount(getDetailAccountInfo);
+            System.getProperties();
             return SuccessApi.VERIFY_STATUS_SUCCESS;
         }else {
             return ErrorApi.VERIFY_STATUS_FAIL;
         }
     }
 
-    public void sendMailVerifyAccount(String subject,String senderName,String contentMail,AccountEntity account,String url) throws MessagingException, UnsupportedEncodingException {
+    public void sendMailVerifyAccount(String newHTML,String subject,String senderName,String contentMail,AccountEntity account,String url,String type) throws MessagingException, UnsupportedEncodingException {
         if(!url.isEmpty()){
             contentMail += "<p>Please click the link below to verify to you registration</p>";
 
@@ -125,6 +131,25 @@ public class AccountServiceImpl implements AccountService {
             //end
 
             contentMail += "<h3> <a href=\"" + verifyURL + "\">VERIFY ACCOUNT</a></h3>";
+
+            contentMail += "<p>Thanks you.</p>";
+
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message);
+
+            helper.setFrom(account.getEmail(),senderName);
+            helper.setTo(account.getEmail());
+            helper.setSubject(subject);
+            helper.setText(contentMail,true);
+
+            mailSender.send(message);
+        }else if(type == "FORGOT"){
+            contentMail += "<h3>Reset Password</h3>";
+
+            contentMail += "<p>Forgot your password?\n" +
+                    "Temporary Password for Shinhan Vietnam Bank InternetBanking Password Reset was forwarded.</p>";
+
+            contentMail += newHTML;
 
             contentMail += "<p>Thanks you.</p>";
 

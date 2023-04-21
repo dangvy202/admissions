@@ -297,7 +297,7 @@ public class StudentController {
                 studentOptionServiceImpl.saveStudent(userOption);
                 applicationFormServiceImpl.saveStudent(applicationFormResult);
                 //send mail when success admission
-                accountServiceImpl.sendMailVerifyAccount("ĐĂNG KÝ TUYỂN SINH THÀNH CÔNG","TRƯỜNG THPT NĂNG KHIẾU","<p>Dear "+account.getEmail()+",</p>",account,"");
+                accountServiceImpl.sendMailVerifyAccount("","ĐĂNG KÝ TUYỂN SINH THÀNH CÔNG","TRƯỜNG THPT NĂNG KHIẾU","<p>Dear "+account.getEmail()+",</p>",account,"","");
 
 
                 return new ResponseEntity<>(SuccessApi.SCH_SUCCESS_SAVE,HttpStatus.CREATED);
