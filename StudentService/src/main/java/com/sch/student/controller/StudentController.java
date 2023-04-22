@@ -303,7 +303,7 @@ public class StudentController {
                 return new ResponseEntity<>(SuccessApi.SCH_SUCCESS_SAVE,HttpStatus.CREATED);
             }
             else {
-                return new ResponseEntity<>(ErrorApi.SCH_ERROR_EMPTY, HttpStatus.OK);
+                return new ResponseEntity<>(ErrorApi.SCH_ERROR_EMPTY, HttpStatus.BAD_REQUEST);
             }
 
     }
