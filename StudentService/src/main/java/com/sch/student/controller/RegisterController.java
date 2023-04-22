@@ -102,7 +102,7 @@ public class RegisterController {
                 String token = jwtTokenProvider.createToken(authentication);
                 Map<Object, Object> model = new HashMap<>();
                 model.put("username", username);
-                model.put("status",1);
+                model.put("existed",true);
                 model.put("token", token);
                 return ok(model);
             }else {
@@ -111,7 +111,7 @@ public class RegisterController {
                 String token = jwtTokenProvider.createToken(authentication);
                 Map<Object, Object> model = new HashMap<>();
                 model.put("username", username);
-                model.put("status",0);
+                model.put("existed",false);
                 model.put("token", token);
                 return ok(model);
             }
