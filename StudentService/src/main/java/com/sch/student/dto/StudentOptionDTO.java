@@ -10,21 +10,20 @@ import lombok.Setter;
 @Setter
 public class StudentOptionDTO {
 
-
     @JsonProperty("math")
     private int math;
 
-    @JsonProperty("informaticsInformatics")
+    @JsonProperty("informatics_informatics")
     private int informaticsInformatics;
 
-    @JsonProperty("informaticsMath")
+    @JsonProperty("informatics_math")
     private int informaticsMath;
 
-    @JsonProperty("physicsPhysics")
+    @JsonProperty("physic_physic")
     private int physicsPhysics;
 
 
-    @JsonProperty("physicsMath")
+    @JsonProperty("physic_math")
     private int physicsMath;
 
     @JsonProperty("chemistry")
@@ -42,22 +41,22 @@ public class StudentOptionDTO {
     @JsonProperty("mathLN")
     private int mathLN;
 
-    @JsonProperty("physicsPhysicsLN")
+    @JsonProperty("physic_physic_LN")
     private int physicsPhysicsLN;
 
-    @JsonProperty("physicsMathLN")
+    @JsonProperty("physic_math_LN")
     private int physicsMathLN;
 
-    @JsonProperty("chemistryChemistryLN")
+    @JsonProperty("chemistry_chemistry_LN")
     private int chemistryChemistryLN;
 
-    @JsonProperty("chemistryMathLN")
+    @JsonProperty("chemistry_math_LN")
     private int chemistryMathLN;
 
-    @JsonProperty("biologyBiologyLN")
+    @JsonProperty("biology_biology_LN")
     private int biologyBiologyLN;
 
-    @JsonProperty("biologyMathLN")
+    @JsonProperty("biology_math_LN")
     private int biologyMathLN;
 
     @JsonProperty("englishLN")
@@ -65,6 +64,62 @@ public class StudentOptionDTO {
 
     @JsonProperty("literatureLN")
     private int literatureLN;
+
+
+//    @JsonProperty("math")
+//    private int math;
+//
+//    @JsonProperty("informaticsInformatics")
+//    private int informaticsInformatics;
+//
+//    @JsonProperty("informaticsMath")
+//    private int informaticsMath;
+//
+//    @JsonProperty("physicsPhysics")
+//    private int physicsPhysics;
+//
+//
+//    @JsonProperty("physicsMath")
+//    private int physicsMath;
+//
+//    @JsonProperty("chemistry")
+//    private int chemistry;
+//
+//    @JsonProperty("biology")
+//    private int biology;
+//
+//    @JsonProperty("english")
+//    private int english;
+//
+//    @JsonProperty("literature")
+//    private int literature;
+//
+//    @JsonProperty("mathLN")
+//    private int mathLN;
+//
+//    @JsonProperty("physicsPhysicsLN")
+//    private int physicsPhysicsLN;
+//
+//    @JsonProperty("physicsMathLN")
+//    private int physicsMathLN;
+//
+//    @JsonProperty("chemistryChemistryLN")
+//    private int chemistryChemistryLN;
+//
+//    @JsonProperty("chemistryMathLN")
+//    private int chemistryMathLN;
+//
+//    @JsonProperty("biologyBiologyLN")
+//    private int biologyBiologyLN;
+//
+//    @JsonProperty("biologyMathLN")
+//    private int biologyMathLN;
+//
+//    @JsonProperty("englishLN")
+//    private int englishLN;
+//
+//    @JsonProperty("literatureLN")
+//    private int literatureLN;
 
 
 }

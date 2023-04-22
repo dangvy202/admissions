@@ -21,9 +21,14 @@ public class ApplicationFormServiceImpl implements ApplicationFormService {
         return applicationFormInfomation;
     }
 
-    public List<ApplicationFormEntity> findApplicationByAccountId(Long id){
-        List<ApplicationFormEntity> app = applicationFormRepository.findApplicationByAccountId(id);
-        return app;
+    public ApplicationFormEntity findApplicationByAccountId(Long id){
+        ApplicationFormEntity app = applicationFormRepository.findApplicationByAccountId(id);
+        if(app != null){
+            return app;
+        }
+        else {
+            return null;
+        }
     }
 
     @Override

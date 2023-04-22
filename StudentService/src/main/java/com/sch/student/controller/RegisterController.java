@@ -4,10 +4,13 @@ import com.sch.student.constant.ErrorApi;
 import com.sch.student.constant.SuccessApi;
 import com.sch.student.dto.AccountDTO;
 import com.sch.student.entity.AccountEntity;
+import com.sch.student.entity.ApplicationFormEntity;
 import com.sch.student.pojo.Account;
 import com.sch.student.repository.AccountRepository;
+import com.sch.student.repository.ApplicationFormRepository;
 import com.sch.student.security.JwtTokenProvider;
 import com.sch.student.service.Impl.AccountServiceImpl;
+import com.sch.student.service.Impl.ApplicationFormServiceImpl;
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -31,13 +34,16 @@ public class RegisterController {
 
     private AccountServiceImpl accountServiceImpl;
 
+    private ApplicationFormServiceImpl applicationFormServiceImpl;
+
     private final AuthenticationManager authenticationManager;
 
     private final JwtTokenProvider jwtTokenProvider;
 
     private final AccountRepository users;
 
-    public RegisterController(AccountServiceImpl accountServiceImpl, AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, AccountRepository users){
+    public RegisterController(ApplicationFormServiceImpl applicationFormServiceImpl,AccountServiceImpl accountServiceImpl, AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, AccountRepository users){
+        this.applicationFormServiceImpl = applicationFormServiceImpl;
         this.accountServiceImpl = accountServiceImpl;
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
@@ -82,16 +88,34 @@ public class RegisterController {
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody Account data) {
-//        accountServiceImpl.
-//check verify
+        //check account exist or not
+        AccountEntity checkAccount = accountServiceImpl.findAccountByIdentifierCode(data.getAccount().getIdentifierCode());
+
+        ApplicationFormEntity applicationForm = applicationFormServiceImpl.findApplicationByAccountId(checkAccount.getId());
+
         try {
-            String username = data.getAccount().getIdentifierCode();
-            var authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getAccount().getPassword()));
-            String token = jwtTokenProvider.createToken(authentication);
-            Map<Object, Object> model = new HashMap<>();
-            model.put("username", username);
-            model.put("token", token);
-            return ok(model);
+
+            if(applicationForm != null){
+                //application exist
+                String username = data.getAccount().getIdentifierCode();
+                var authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getAccount().getPassword()));
+                String token = jwtTokenProvider.createToken(authentication);
+                Map<Object, Object> model = new HashMap<>();
+                model.put("username", username);
+                model.put("status",1);
+                model.put("token", token);
+                return ok(model);
+            }else {
+                String username = data.getAccount().getIdentifierCode();
+                var authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getAccount().getPassword()));
+                String token = jwtTokenProvider.createToken(authentication);
+                Map<Object, Object> model = new HashMap<>();
+                model.put("username", username);
+                model.put("status",0);
+                model.put("token", token);
+                return ok(model);
+            }
+
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid username/password supplied");
         }

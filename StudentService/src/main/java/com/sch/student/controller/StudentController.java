@@ -140,12 +140,12 @@ public class StudentController {
     }
 
     //hỏi lai
-    @GetMapping("/allInfomation/{id}")
-    public ResponseEntity<List<ApplicationFormEntity>> listEnrollmentInfomation(@PathVariable("id") Long idUser){
-        List<ApplicationFormEntity> applicationForm = applicationFormServiceImpl.findApplicationByAccountId(idUser);
-
-        return new ResponseEntity<>(applicationForm,HttpStatus.OK);
-    }
+//    @GetMapping("/allInfomation/{id}")
+//    public ResponseEntity<List<ApplicationFormEntity>> listEnrollmentInfomation(@PathVariable("id") Long idUser){
+//        List<ApplicationFormEntity> applicationForm = applicationFormServiceImpl.findApplicationByAccountId(idUser);
+//
+//        return new ResponseEntity<>(applicationForm,HttpStatus.OK);
+//    }
 
     //GET INFOMATION OF ADMISSION(NOT SCH_IMG_INFOMATION AND ACCOUNT)
     @GetMapping("/infomation/edit/{id}")
