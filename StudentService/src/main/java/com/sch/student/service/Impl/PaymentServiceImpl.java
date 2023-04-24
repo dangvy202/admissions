@@ -100,7 +100,7 @@ public class PaymentServiceImpl implements PaymentService {
         if(userOption.getLiteratureLN() != 0){
             seq ++;
         }
-        double amount = 450000 * 4;
+        double amount = 450000 + 50000 * seq;
         return amount;
     }
 }
