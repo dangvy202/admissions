@@ -42,9 +42,11 @@ public class StudentController {
     private SubjectServiceImpl subjectServiceImpl;
     private AccountServiceImpl accountServiceImpl;
     private ImgServiceImpl imgServiceImpl;
+    private PaymentServiceImpl paymentServiceImpl;
 
-    public StudentController(ImgServiceImpl imgServiceImpl,SubjectServiceImpl subjectServiceImpl ,AccountServiceImpl accountServiceImpl,ApplicationFormServiceImpl applicationFormServiceImpl ,CategoriesServiceImpl categoriesServiceImpl , StudentOptionServiceImpl studentOptionServiceImpl , StudentEnrollServiceImpl studentEnrollServiceImpl,StudentInfoClassServiceImpl studentInfoClassServiceImpl, StudentReportServiceImpl studentReportServiceImpl,StudentServiceImpl studentServiceImpl){
+    public StudentController(PaymentServiceImpl paymentServiceImpl, ImgServiceImpl imgServiceImpl,SubjectServiceImpl subjectServiceImpl ,AccountServiceImpl accountServiceImpl,ApplicationFormServiceImpl applicationFormServiceImpl ,CategoriesServiceImpl categoriesServiceImpl , StudentOptionServiceImpl studentOptionServiceImpl , StudentEnrollServiceImpl studentEnrollServiceImpl,StudentInfoClassServiceImpl studentInfoClassServiceImpl, StudentReportServiceImpl studentReportServiceImpl,StudentServiceImpl studentServiceImpl){
         this.studentServiceImpl = studentServiceImpl;
+        this.paymentServiceImpl = paymentServiceImpl;
         this.studentReportServiceImpl = studentReportServiceImpl;
         this.studentInfoClassServiceImpl = studentInfoClassServiceImpl;
         this.studentEnrollServiceImpl = studentEnrollServiceImpl;
@@ -277,6 +279,13 @@ public class StudentController {
         return new ResponseEntity<>("EDIT SUCCESS",HttpStatus.OK);
     }
 
+    @GetMapping("/amount/{id}")
+    public Double getAmmountAdmission(@PathVariable("id") String id){
+        AccountEntity account = accountServiceImpl.findAccountByIdentifierCode(id);
+        PaymentEntity payment = paymentServiceImpl.findPaymentByAccountId(account.getId());
+        return payment.getAmount();
+    }
+
     @PostMapping("/setInfo")
     public ResponseEntity<String> saveInfoStudent(@RequestBody Student userRequest) throws Exception {
 
@@ -286,9 +295,10 @@ public class StudentController {
             StudentEnrollEntity userEnroll = studentEnrollServiceImpl.setStudentEnroll(userRequest,userReport);
             StudentOptionEntity userOption = studentOptionServiceImpl.setStudentOption(userRequest,userReport);
             AccountEntity account = accountServiceImpl.setAccountForApplicationForm(userRequest.getAccount().getIdentifierCode());
+            PaymentEntity payment = paymentServiceImpl.setPayment(userRequest.getUserOption(),account);
             SubjectEntity subject = subjectServiceImpl.setSubjectInfomation(userRequest);
             ApplicationFormEntity applicationFormResult = applicationFormServiceImpl.setStudentEnroll(subject,account,userInfo,userReport,userOption,userInfoClass,userEnroll);
-            if(!subject.toString().isEmpty() && !account.toString().isEmpty() && !applicationFormResult.toString().isEmpty() && !userInfo.toString().isEmpty() && !userReport.toString().isEmpty() && !userInfoClass.toString().isEmpty() && !userEnroll.toString().isEmpty()){
+            if(!payment.toString().isEmpty() && !subject.toString().isEmpty() && !account.toString().isEmpty() && !applicationFormResult.toString().isEmpty() && !userInfo.toString().isEmpty() && !userReport.toString().isEmpty() && !userInfoClass.toString().isEmpty() && !userEnroll.toString().isEmpty()){
                 studentServiceImpl.saveStudent(userInfo);
                 subjectServiceImpl.saveSubject(subject);
                 studentReportServiceImpl.saveStudent(userReport);
@@ -296,6 +306,7 @@ public class StudentController {
                 studentEnrollServiceImpl.saveStudent(userEnroll);
                 studentOptionServiceImpl.saveStudent(userOption);
                 applicationFormServiceImpl.saveStudent(applicationFormResult);
+                paymentServiceImpl.savePayment(payment);
                 //send mail when success admission
                 accountServiceImpl.sendMailVerifyAccount("","ĐĂNG KÝ TUYỂN SINH THÀNH CÔNG","TRƯỜNG THPT NĂNG KHIẾU","<p>Dear "+account.getEmail()+",</p>",account,"","");
 
