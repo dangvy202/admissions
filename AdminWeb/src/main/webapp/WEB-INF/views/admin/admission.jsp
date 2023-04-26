@@ -221,6 +221,9 @@
 																<td>${applicationForm.schReport.district}</td>
 																<td>${applicationForm.schReport.ward}</td>
 																<td>${applicationForm.schReport.schoolAddress}</td>
+
+
+
 																<td>${applicationForm.subject.math}</td>
 																<td>${applicationForm.subject.literature}</td>
 																<td>${applicationForm.subject.informatics}</td>
@@ -235,7 +238,6 @@
 																<td>${applicationForm.schOption.chemistryCS1}</td>
 																<td>${applicationForm.schOption.biologycs1}</td>
 																<td>${applicationForm.schOption.englishCS1}</td>
-																
 																<td>${applicationForm.schOption.mathCS2}</td>
 																<td>${applicationForm.schOption.literatureCS2}</td>
 																<td>${applicationForm.schOption.informaticsCS2}</td>

@@ -59,8 +59,8 @@ public class StudentController {
     }
 
     //GET INFOMATION OF SCH_IMG_INFOMATION AND ACCOUNT
-    @GetMapping("/account/edit/{id}")
-    public ResponseEntity<?> editAccountAndImgInfomation(@PathVariable("id") Long idUser){
+    @GetMapping("/get/account/{id}")
+    public ResponseEntity<?> findAccountAndImgInfomationById(@PathVariable("id") Long idUser){
         //find account
         AccountEntity account = accountServiceImpl.findAccountById(idUser).get();
 
@@ -95,7 +95,7 @@ public class StudentController {
     }
 
     //UPDATE INFOMATION OF ADMISSION(SCH_IMG_INFOMATION AND ACCOUNT)
-    @PostMapping("/account/update/{id}")
+    @PostMapping("/update/account/{id}")
     public ResponseEntity<String> updateAccountAndImg(@PathVariable("id") Long id,
                                                       @RequestParam("passWord") String password,
                                                       @RequestParam("email") String email,
@@ -150,8 +150,8 @@ public class StudentController {
 //    }
 
     //GET INFOMATION OF ADMISSION(NOT SCH_IMG_INFOMATION AND ACCOUNT)
-    @GetMapping("/infomation/edit/{id}")
-    public ResponseEntity<Map<String,Map<String,List<?>>>> editEnrollmentInfomation(@PathVariable("id") Long idApplication){
+    @GetMapping("/get/infomation/{id}")
+    public ResponseEntity<Map<String,Map<String,List<?>>>> getEnrollmentInfomationByIdApplication(@PathVariable("id") Long idApplication){
         ApplicationFormEntity applicationFormEdit = applicationFormServiceImpl.findEnrollInfomation(idApplication);
 
         List<StudentEntity>  schUser = new ArrayList<>();
@@ -189,7 +189,7 @@ public class StudentController {
     }
 
     //UPDATE INFOMATION OF ADMISSION(NOT SCH_IMG_INFOMATION AND ACCOUNT)
-    @PostMapping("/update/{id}")
+    @PostMapping("/update/infomation/{id}")
     public ResponseEntity<String> updateEnrollmentInfomation(@PathVariable("id") Long id,@RequestBody Student userRequest){
         //find id table schReport
         Optional<StudentReportEntity> schReport = studentReportServiceImpl.findReportById(id);
